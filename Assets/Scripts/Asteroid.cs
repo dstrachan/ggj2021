@@ -44,18 +44,22 @@ public class Asteroid : MonoBehaviour
 
     public void AsteroidDestroyed()
     {
-
-        if(transform.localScale.x > 0.9)
+        if (prefab != null)
         {
-   
-            //var pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            if (transform.localScale.x >= 1.3)
+            {
+                //var pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+                var smallerones = Random.Range(4, 7);
 
-            var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
+                for (int i = 0; i < smallerones; i++)
+                {
+                    var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
 
-            var scaler = Random.Range(transform.localScale.x / 3f, transform.localScale.x);
-            asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+                    var scaler = Random.Range(transform.localScale.x / 8f, transform.localScale.x / 4f);
+                    asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+                }
+            }
 
-            
         }
         Destroy(gameObject);
 
