@@ -1,24 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipGrid : MonoBehaviour
 {
     public Dictionary<(int, int), ShipCell> Cells { get; } = new Dictionary<(int, int), ShipCell>();
 
-    private bool needsUpdate;
+    private bool _needsUpdate;
+    private ShipCell _root;
+
+    [SerializeField] private GameObject _ghostPrefab;
+    [SerializeField] private string _shopScene;
 
     private void Awake()
     {
-        Cells[(0, 0)] = GetComponent<ShipCell>();
+        _root = GetComponent<ShipCell>();
+        Cells[(0, 0)] = _root;
+    }
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name.Equals(_shopScene)) // TODO: Better approach?
+        {
+            _root.SpawnGhosts(_ghostPrefab);
+        }
     }
 
     private void LateUpdate()
     {
-        if (needsUpdate)
+        if (_needsUpdate)
         {
             ReorderHierarchy(Cells[(0, 0)].transform, 0);
-            needsUpdate = false;
+            _needsUpdate = false;
         }
     }
 
@@ -40,7 +54,7 @@ public class ShipGrid : MonoBehaviour
         }
         Cells[(x, y)] = value;
 
-        needsUpdate = true;
+        _needsUpdate = true;
     }
 
     private void ReorderHierarchy(Transform root, int depth)

@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 4854804618848154022}
   - component: {fileID: 7258479190281700716}
   - component: {fileID: 8205873501560992287}
+  - component: {fileID: 5624383966747387333}
   m_Layer: 0
-  m_Name: gun
+  m_Name: ShipGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,3 +133,16 @@ MonoBehaviour:
   SecondsBetweenShots: 0.3
   ShootPoint: {fileID: 6509000712785226201}
   Bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}
+--- !u!114 &5624383966747387333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9204143974621766841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ghostPrefab: {fileID: 0}

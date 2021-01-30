@@ -6,13 +6,14 @@ public class TestMove : MonoBehaviour
 {
     public LayerMask ghostLayer;
 
-    private Collider currentSquare;
-    private readonly RaycastHit[] results = new RaycastHit[1];
+    private Collider _currentSquare;
+    private readonly RaycastHit[] _results = new RaycastHit[1];
     private ShipGrid _grid;
 
-    [SerializeField] private Material ghostMaterial;
-    [SerializeField] private Material highlightMaterial;
-    [SerializeField] private GameObject nodePrefab;
+    [SerializeField] private Material _ghostMaterial;
+    [SerializeField] private Material _highlightMaterial;
+    [SerializeField] private GameObject _nodePrefab;
+    [SerializeField] private GameObject _ghostPrefab;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class TestMove : MonoBehaviour
 
     private void Update()
     {
-        if (currentSquare == null)
+        if (_currentSquare == null)
         {
             var plane = new Plane(Vector3.up, 0);
 
@@ -36,35 +37,37 @@ public class TestMove : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            var ghost = currentSquare.gameObject;
-            var shipNode = ghost.transform.parent.GetComponent<ShipCell>();
+            var ghost = _currentSquare.gameObject;
+            var parentNode = ghost.transform.parent.GetComponent<ShipCell>();
 
-            // TODO: Replace nodePrefab with actual ship node
-            shipNode.AddNode(nodePrefab, ghost.transform.position);
+            // TODO: Replace nodePrefab/ghostPrefab with actual ship nodes
+            var childNode = parentNode.AddNode(_nodePrefab, ghost.transform.position);
+            childNode?.SpawnGhosts(_ghostPrefab);
 
-            currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
-            currentSquare = null;
+
+            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare = null;
         }
     }
 
     private void FixedUpdate()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var n = Physics.RaycastNonAlloc(ray, results, 100, ghostLayer);
+        var n = Physics.RaycastNonAlloc(ray, _results, 100, ghostLayer);
         if (n > 0)
         {
-            if (currentSquare != null)
+            if (_currentSquare != null)
             {
-                currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
+                _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
             }
-            currentSquare = results[0].collider;
-            currentSquare.GetComponent<Renderer>().material.color = highlightMaterial.color;
-            transform.position = currentSquare.transform.position;
+            _currentSquare = _results[0].collider;
+            _currentSquare.GetComponent<Renderer>().material.color = _highlightMaterial.color;
+            transform.position = _currentSquare.transform.position;
         }
-        else if (currentSquare != null)
+        else if (_currentSquare != null)
         {
-            currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
-            currentSquare = null;
+            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare = null;
         }
     }
 }

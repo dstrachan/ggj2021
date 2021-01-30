@@ -32,34 +32,9 @@ public class ShipCell : MonoBehaviour
 
     private ShipGrid _grid;
 
-    [SerializeField] private GameObject _ghostPrefab;
-
     private void Awake()
     {
         _grid = GetComponentInParent<ShipGrid>();
-    }
-
-    private void Start()
-    {
-        if (IsGhost)
-            return;
-
-        if (Forward == null)
-        {
-            Forward = InstantiateNode(_ghostPrefab, Vector3.forward);
-        }
-        if (Back == null)
-        {
-            Back = InstantiateNode(_ghostPrefab, Vector3.back);
-        }
-        if (Left == null)
-        {
-            Left = InstantiateNode(_ghostPrefab, Vector3.left);
-        }
-        if (Right == null)
-        {
-            Right = InstantiateNode(_ghostPrefab, Vector3.right);
-        }
     }
 
     private ShipCell InstantiateNode(GameObject prefab, Vector3 offset)
@@ -74,28 +49,54 @@ public class ShipCell : MonoBehaviour
         return shipCell;
     }
 
-    public void AddNode(GameObject prefab, Vector3 position)
+    public ShipCell AddNode(GameObject prefab, Vector3 position)
     {
-        var direction = transform.position - position;
-        if (direction.z < 0)
+        var direction = position - transform.position;
+        var z = Mathf.Round(direction.z);
+        var x = Mathf.Round(direction.x);
+
+        ShipCell node = null;
+        if (z > 0)
         {
-            var node = InstantiateNode(prefab, Vector3.forward);
+            node = InstantiateNode(prefab, Vector3.forward);
             Forward = node;
         }
-        else if (direction.z > 0)
+        else if (z < 0)
         {
-            var node = InstantiateNode(prefab, Vector3.back);
+            node = InstantiateNode(prefab, Vector3.back);
             Back = node;
         }
-        else if (direction.x > 0)
+        else if (x < 0)
         {
-            var node = InstantiateNode(prefab, Vector3.left);
+            node = InstantiateNode(prefab, Vector3.left);
             Left = node;
         }
-        else if (direction.x < 0)
+        else if (x > 0)
         {
-            var node = InstantiateNode(prefab, Vector3.right);
+            node = InstantiateNode(prefab, Vector3.right);
             Right = node;
+        }
+
+        return node;
+    }
+
+    public void SpawnGhosts(GameObject prefab)
+    {
+        if (Forward?.IsGhost ?? true)
+        {
+            Forward = InstantiateNode(prefab, Vector3.forward);
+        }
+        if (Back?.IsGhost ?? true)
+        {
+            Back = InstantiateNode(prefab, Vector3.back);
+        }
+        if (Left?.IsGhost ?? true)
+        {
+            Left = InstantiateNode(prefab, Vector3.left);
+        }
+        if (Right?.IsGhost ?? true)
+        {
+            Right = InstantiateNode(prefab, Vector3.right);
         }
     }
 }
