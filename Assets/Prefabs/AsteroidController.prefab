@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4e58cd940912a4dbe6c60d87f79af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAsteroids: 150
+  maxAsteroids: 100
   maxSpawnRadius: 200
   minSpawnRadius: 50
   spawnRatePerMinute: 800

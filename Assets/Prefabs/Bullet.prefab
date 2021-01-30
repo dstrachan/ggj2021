@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1200
   damage: 40
-  maxDistance: 20
+  maxDistance: 25
 --- !u!54 &8422676437262644661
 Rigidbody:
   m_ObjectHideFlags: 0
