@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    public float turnSpeed;
 
     private Rigidbody _rigidbody;
 
@@ -14,9 +13,15 @@ public class ShipController : MonoBehaviour
     private Thruster[] _rearThrusters;
     private Thruster[] _rightThrusters;
 
+    private GameObject _player;
+
+    public float maxSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
+
         _rigidbody = GetComponent<Rigidbody>();
         _allThrusters = GetComponentsInChildren<Thruster>();
 
@@ -28,9 +33,32 @@ public class ShipController : MonoBehaviour
 
     }
 
+    void OnDrawGizmos()
+    {
+        // Draws a 5 unit long red line in front of the object
+        Gizmos.color = Color.red;
+
+        if (_player != null)
+        {
+            var playerVelocity = _player.GetComponent<Rigidbody>().velocity;
+
+            Gizmos.DrawRay(transform.position, playerVelocity);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_rigidbody.velocity.magnitude > maxSpeed)
+        {
+            float brakeSpeed = _rigidbody.velocity.magnitude - maxSpeed;
+
+            Vector3 normalisedVelocity = _rigidbody.velocity.normalized;
+            Vector3 brakeVelocity = normalisedVelocity * brakeSpeed;
+
+            _rigidbody.AddForce(-brakeVelocity);  // apply opposing brake force
+        }
+
         foreach (var thruster in _allThrusters)
         {
             thruster.lightEffect.enabled = false;
