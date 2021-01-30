@@ -33,18 +33,18 @@ public class ShipController : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
-    {
-        // Draws a 5 unit long red line in front of the object
-        Gizmos.color = Color.red;
+    //void OnDrawGizmos()
+    //{
+    //    // Draws a 5 unit long red line in front of the object
+    //    Gizmos.color = Color.red;
 
-        if (_player != null)
-        {
-            var playerVelocity = _player.GetComponent<Rigidbody>().velocity;
+    //    if (_player != null)
+    //    {
+    //        var playerVelocity = _player.GetComponent<Rigidbody>().velocity;
 
-            Gizmos.DrawRay(transform.position, playerVelocity);
-        }
-    }
+    //        Gizmos.DrawRay(transform.position, playerVelocity);
+    //    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -61,7 +61,10 @@ public class ShipController : MonoBehaviour
 
         foreach (var thruster in _allThrusters)
         {
-            thruster.lightEffect.enabled = false;
+            if (thruster.lightEffect != null)
+            {
+                thruster.lightEffect.enabled = false;
+            }
         }
 
         if (Input.GetKey(KeyCode.W))

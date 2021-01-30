@@ -19,7 +19,10 @@ public class Thruster : MonoBehaviour
     void Start()
     {
         lightEffect = GetComponentInChildren<Light>();
-        lightEffect.enabled = false;
+        if(lightEffect != null)
+        {
+            lightEffect.enabled = false;
+        }
     }
 
     // Update is called once per frame
