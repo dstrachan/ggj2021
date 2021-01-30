@@ -7,28 +7,28 @@ public class ShipCell : MonoBehaviour
     public int x { get; private set; }
     public int y { get; private set; }
 
-    public ShipCell Forward
+    public ShipCell forward
     {
         get => _grid.Get(x, y + 1);
         set => _grid.Set(x, y + 1, value);
     }
-    public ShipCell Back
+    public ShipCell back
     {
         get => _grid.Get(x, y - 1);
         set => _grid.Set(x, y - 1, value);
     }
-    public ShipCell Left
+    public ShipCell left
     {
         get => _grid.Get(x - 1, y);
         set => _grid.Set(x - 1, y, value);
     }
-    public ShipCell Right
+    public ShipCell right
     {
         get => _grid.Get(x + 1, y);
         set => _grid.Set(x + 1, y, value);
     }
 
-    public bool IsGhost => tag.Equals("Ghost");
+    public bool isGhost => tag.Equals("Ghost");
 
     private ShipGrid _grid;
 
@@ -39,7 +39,7 @@ public class ShipCell : MonoBehaviour
 
     private ShipCell InstantiateNode(GameObject prefab, Vector3 offset)
     {
-        var obj = Instantiate(prefab, transform.position + offset, transform.rotation, transform);
+        var obj = Instantiate(prefab, transform.position + offset, prefab.transform.rotation, transform);
         var shipCell = obj.GetComponent<ShipCell>();
         if (shipCell != null)
         {
@@ -59,22 +59,22 @@ public class ShipCell : MonoBehaviour
         if (z > 0)
         {
             node = InstantiateNode(prefab, Vector3.forward);
-            Forward = node;
+            forward = node;
         }
         else if (z < 0)
         {
             node = InstantiateNode(prefab, Vector3.back);
-            Back = node;
+            back = node;
         }
         else if (x < 0)
         {
             node = InstantiateNode(prefab, Vector3.left);
-            Left = node;
+            left = node;
         }
         else if (x > 0)
         {
             node = InstantiateNode(prefab, Vector3.right);
-            Right = node;
+            right = node;
         }
 
         return node;
@@ -82,21 +82,21 @@ public class ShipCell : MonoBehaviour
 
     public void SpawnGhosts(GameObject prefab)
     {
-        if (Forward?.IsGhost ?? true)
+        if (forward?.isGhost ?? true)
         {
-            Forward = InstantiateNode(prefab, Vector3.forward);
+            forward = InstantiateNode(prefab, Vector3.forward);
         }
-        if (Back?.IsGhost ?? true)
+        if (back?.isGhost ?? true)
         {
-            Back = InstantiateNode(prefab, Vector3.back);
+            back = InstantiateNode(prefab, Vector3.back);
         }
-        if (Left?.IsGhost ?? true)
+        if (left?.isGhost ?? true)
         {
-            Left = InstantiateNode(prefab, Vector3.left);
+            left = InstantiateNode(prefab, Vector3.left);
         }
-        if (Right?.IsGhost ?? true)
+        if (right?.isGhost ?? true)
         {
-            Right = InstantiateNode(prefab, Vector3.right);
+            right = InstantiateNode(prefab, Vector3.right);
         }
     }
 }

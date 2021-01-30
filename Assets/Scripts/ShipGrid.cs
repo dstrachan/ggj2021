@@ -8,23 +8,10 @@ public class ShipGrid : MonoBehaviour
     public Dictionary<(int, int), ShipCell> cells { get; } = new Dictionary<(int, int), ShipCell>();
 
     private bool _needsUpdate;
-    private ShipCell _root;
-
-    [SerializeField] private GameObject _ghostPrefab;
-    [SerializeField] private string _shopScene;
 
     private void Awake()
     {
-        _root = GetComponent<ShipCell>();
-        cells[(0, 0)] = _root;
-    }
-
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name.Equals(_shopScene)) // TODO: Better approach?
-        {
-            _root.SpawnGhosts(_ghostPrefab);
-        }
+        cells[(0, 0)] = GetComponent<ShipCell>();
     }
 
     private void LateUpdate()
