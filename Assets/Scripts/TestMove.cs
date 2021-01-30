@@ -44,7 +44,10 @@ public class TestMove : MonoBehaviour
         var scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
-            _child.transform.Rotate(Vector3.up, 90 * scroll);
+            if (_child.GetComponent<ShipCell>().cellType != CellType.Hull)
+            {
+                _child.transform.Rotate(Vector3.up, 90 * scroll);
+            }
         }
 
         if (_currentSquare == null)
@@ -67,6 +70,9 @@ public class TestMove : MonoBehaviour
             }
             else
             {
+                if (!_child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+                    return;
+
                 var shipCell = ghost.GetComponent<ShipCell>();
                 _grid.Add(shipCell.x, shipCell.y, _child);
             }
@@ -88,8 +94,16 @@ public class TestMove : MonoBehaviour
             {
                 _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             }
+
             _currentSquare = _results[0].collider;
-            _currentSquare.GetComponent<HighlightCell>().Highlight();
+            if (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+            {
+                _currentSquare.GetComponent<HighlightCell>().HighlightGood();
+            }
+            else
+            {
+                _currentSquare.GetComponent<HighlightCell>().HighlightBad();
+            }
             transform.position = _currentSquare.transform.position;
         }
         else if (_currentSquare != null)
