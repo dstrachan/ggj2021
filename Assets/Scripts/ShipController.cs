@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    public float TurnSpeed;
+    public float turnSpeed;
 
     private Rigidbody _rigidbody;
 
@@ -22,18 +22,18 @@ public class ShipController : MonoBehaviour
 
         var angles = _allThrusters.Select(w => w.transform.eulerAngles).ToArray();
 
-        _rightThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 90).ToArray();
-        _leftThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 270).ToArray();
-        _rearThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 0).ToArray();
+        _rightThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Right).ToArray();
+        _leftThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Left).ToArray();
+        _rearThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Forward).ToArray();
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         foreach (var thruster in _allThrusters)
         {
-            thruster.LightEffect.enabled = false;
+            thruster.lightEffect.enabled = false;
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -57,8 +57,8 @@ public class ShipController : MonoBehaviour
     {
         foreach (var thruster in thrusters)
         {
-            _rigidbody.AddForceAtPosition(thruster.ThrustForce * (thruster.transform.forward) * Time.deltaTime, thruster.transform.position);
-            thruster.LightEffect.enabled = true;
+            _rigidbody.AddForceAtPosition(thruster.thrustForce * (thruster.transform.forward) * Time.deltaTime, thruster.transform.position);
+            thruster.lightEffect.enabled = true;
         }
     }
 }
