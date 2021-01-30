@@ -12,8 +12,6 @@ public class TestMove : MonoBehaviour
     private GameObject _currentPrefab;
     private GameObject _child;
 
-    [SerializeField] private Material _ghostMaterial;
-    [SerializeField] private Material _highlightMaterial;
     [SerializeField] private GameObject[] _shipPrefabs;
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
@@ -66,7 +64,7 @@ public class TestMove : MonoBehaviour
             var childNode = parentNode.AddNode(_currentPrefab, ghost.transform.position);
             childNode?.SpawnGhosts(_ghostPrefab);
 
-            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             _currentSquare = null;
 
             NextPrefab();
@@ -81,15 +79,15 @@ public class TestMove : MonoBehaviour
         {
             if (_currentSquare != null)
             {
-                _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+                _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             }
             _currentSquare = _results[0].collider;
-            _currentSquare.GetComponent<Renderer>().material.color = _highlightMaterial.color;
+            _currentSquare.GetComponent<HighlightCell>().Highlight();
             transform.position = _currentSquare.transform.position;
         }
         else if (_currentSquare != null)
         {
-            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             _currentSquare = null;
         }
     }

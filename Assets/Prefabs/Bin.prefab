@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5780197626734049795}
   - component: {fileID: 5780197626734049794}
   - component: {fileID: 5780197626734049793}
-  - component: {fileID: 8072617074816681900}
+  - component: {fileID: 3224727057363461879}
   m_Layer: 6
-  m_Name: ShipGhost
+  m_Name: Bin
   m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bec2e1c1fbfee504588f604fc5556a39, type: 2}
+  - {fileID: 2100000, guid: 6efc5e71b1c1e0a43bc2ec8b77269ba1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8072617074816681900
+--- !u!114 &3224727057363461879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625cc7376d44ba04a99422bb137562cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originalMaterial: {fileID: 2100000, guid: bec2e1c1fbfee504588f604fc5556a39, type: 2}
+  _originalMaterial: {fileID: 2100000, guid: 6efc5e71b1c1e0a43bc2ec8b77269ba1, type: 2}
   _highlightMaterial: {fileID: 2100000, guid: d21abacb8f68f164eac9b72c02bbbe9a, type: 2}
