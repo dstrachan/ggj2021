@@ -12,7 +12,7 @@ public class ShipGrid : MonoBehaviour
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
 
-    [SerializeField] private GameObject _corePrefab;
+    [SerializeField] private GameObject _shipPrefab;
     [SerializeField] private GameObject _hullPrefab;
     [SerializeField] private GameObject _gunPrefab;
     [SerializeField] private GameObject _thrusterPrefab;
@@ -134,7 +134,7 @@ public class ShipGrid : MonoBehaviour
 
     public GameObject Export()
     {
-        var obj = Instantiate(_corePrefab);
+        var obj = Instantiate(_shipPrefab);
         foreach (var cell in cells.Values)
         {
             switch (cell.cellType)
