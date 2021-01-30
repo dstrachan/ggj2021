@@ -17,6 +17,7 @@ public class TestMove : MonoBehaviour
     [SerializeField] private string _ghostTag;
     [SerializeField] private LayerMask _ghostLayer;
     [SerializeField] private string _shopScene;
+    [SerializeField] private GameObject _bin;
 
     private void Awake()
     {
@@ -58,11 +59,18 @@ public class TestMove : MonoBehaviour
         else if (Input.GetMouseButtonDown(0))
         {
             var ghost = _currentSquare.gameObject;
-            var parentNode = ghost.transform.parent.GetComponent<ShipCell>();
+            if (ghost == _bin)
+            {
+                NextPrefab();
+            }
+            else
+            {
+                var parentNode = ghost.transform.parent.GetComponent<ShipCell>();
 
-            // TODO: Replace nodePrefab/ghostPrefab with actual ship nodes
-            var childNode = parentNode.AddNode(_currentPrefab, ghost.transform.position);
-            childNode?.SpawnGhosts(_ghostPrefab);
+                // TODO: Replace nodePrefab/ghostPrefab with actual ship nodes
+                var childNode = parentNode.AddNode(_currentPrefab, ghost.transform.position);
+                childNode?.SpawnGhosts(_ghostPrefab);
+            }
 
             _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             _currentSquare = null;

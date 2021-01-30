@@ -273,6 +273,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &679749047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5780197626734049792, guid: 5ccfb14757933e94a8fa8391276140aa, type: 3}
+  m_PrefabInstance: {fileID: 36663869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &975113099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -442,8 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38816291117850341ba6124dd43bf4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ghostMaterial: {fileID: 2100000, guid: bec2e1c1fbfee504588f604fc5556a39, type: 2}
-  _highlightMaterial: {fileID: 2100000, guid: d21abacb8f68f164eac9b72c02bbbe9a, type: 2}
   _shipPrefabs:
   - {fileID: 39174816975284584, guid: 052f7819bd38f494bb9f3fab5906a9f1, type: 3}
   - {fileID: 9204143974621766841, guid: 5e93c6b48c043da4abf0b2ec0fdcead0, type: 3}
@@ -454,6 +457,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _shopScene: Shop
+  _bin: {fileID: 679749047}
 --- !u!4 &846955891018196101
 Transform:
   m_ObjectHideFlags: 0
