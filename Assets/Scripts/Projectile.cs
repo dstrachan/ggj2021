@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
         }
 
         //var nextPosition = transform.forward * Speed * Time.deltaTime;
-        _rigidbody.velocity = transform.forward * speed * Time.deltaTime;
+        _rigidbody.velocity = _player.GetComponent<Rigidbody>().velocity + transform.forward * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision collision)
