@@ -548,6 +548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: planet (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2668171066058109682, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7478292036028863169, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
       propertyPath: Speed
       value: 8
