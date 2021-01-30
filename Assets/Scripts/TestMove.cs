@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Tidy/fix highlight
 public class TestMove : MonoBehaviour
 {
     public LayerMask ghostLayer;
 
     private Collider currentSquare;
-    private readonly RaycastHit[] results = new RaycastHit[5];
+    private readonly RaycastHit[] results = new RaycastHit[1];
     private ShipGrid _grid;
 
     [SerializeField] private Material ghostMaterial;
@@ -43,7 +42,7 @@ public class TestMove : MonoBehaviour
             // TODO: Replace nodePrefab with actual ship node
             shipNode.AddNode(nodePrefab, ghost.transform.position);
 
-            _grid.ClearHighlight(ghostMaterial.color);
+            currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
             currentSquare = null;
         }
     }
@@ -54,17 +53,17 @@ public class TestMove : MonoBehaviour
         var n = Physics.RaycastNonAlloc(ray, results, 100, ghostLayer);
         if (n > 0)
         {
-            currentSquare = results[0].collider;
-            var shipCell = currentSquare.GetComponent<ShipCell>();
-            if (shipCell != null)
+            if (currentSquare != null)
             {
-                _grid.Highlight(shipCell.X, shipCell.Y, ghostMaterial.color, highlightMaterial.color);
+                currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
             }
+            currentSquare = results[0].collider;
+            currentSquare.GetComponent<Renderer>().material.color = highlightMaterial.color;
             transform.position = currentSquare.transform.position;
         }
         else
         {
-            _grid.ClearHighlight(ghostMaterial.color);
+            currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
             currentSquare = null;
         }
     }

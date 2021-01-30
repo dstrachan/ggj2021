@@ -31,22 +31,22 @@ public class ShipGrid : MonoBehaviour
         Cells[(x, y)] = value;
     }
 
-    public void ClearHighlight(Color color)
-    {
-        foreach (var cell in Cells)
-        {
-            cell.Value.GetComponent<Renderer>().material.color = cell.Value.IsGhost ? color : Color.white;
-        }
-    }
+    //public void ClearHighlight(Color color)
+    //{
+    //    foreach (var cell in Cells)
+    //    {
+    //        cell.Value.GetComponent<Renderer>().material.color = cell.Value.IsGhost ? color : Color.white;
+    //    }
+    //}
 
-    public void Highlight(int x, int y, Color color, Color highlightColor)
-    {
-        ClearHighlight(color);
+    //public void Highlight(int x, int y, Color color, Color highlightColor)
+    //{
+    //    ClearHighlight(color);
 
-        var shipCell = Get(x, y);
-        if (shipCell != null && shipCell.IsGhost)
-        {
-            shipCell.GetComponent<Renderer>().material.color = highlightColor;
-        }
-    }
+    //    var shipCell = Get(x, y);
+    //    if (shipCell != null && shipCell.IsGhost)
+    //    {
+    //        shipCell.GetComponent<Renderer>().material.color = highlightColor;
+    //    }
+    //}
 }
