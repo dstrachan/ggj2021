@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1168430801396738425}
   - component: {fileID: 2668171066058109682}
   - component: {fileID: 7478292036028863169}
+  - component: {fileID: -937425510564299936}
   m_Layer: 0
   m_Name: planet (2)
   m_TagString: Untagged
@@ -94,7 +95,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -113,6 +114,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0
+--- !u!114 &-937425510564299936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808367475938756780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0675b0c0866f3c04084e15b29cd2b8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: {fileID: 1203120287997019820, guid: 540e228b04291e6449ed11c9dd55e4ad, type: 3}
+  indicatorDistance: 10
 --- !u!1001 &2089684731565346875
 PrefabInstance:
   m_ObjectHideFlags: 0
