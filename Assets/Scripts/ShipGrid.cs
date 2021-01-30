@@ -48,15 +48,17 @@ public class ShipGrid : MonoBehaviour
 
     public void Add(int x, int y, GameObject obj)
     {
-        obj.transform.parent = transform;
-        obj.transform.position = Get(x, y).transform.position;
+        var old = Get(x, y);
+        if (old != null)
+        {
+            obj.transform.parent = transform;
+            obj.transform.position = Get(x, y).transform.position;
+        }
 
         var shipCell = obj.GetComponent<ShipCell>();
         shipCell.x = x;
         shipCell.y = y;
         Set(x, y, shipCell);
-
-        UpdateGhosts();
     }
 
     public void Remove(int x, int y)

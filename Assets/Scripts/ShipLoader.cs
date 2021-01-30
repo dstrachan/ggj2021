@@ -21,18 +21,22 @@ public class ShipLoader : MonoBehaviour
             return null;
 
         var obj = Instantiate(_shipPrefab);
+        var grid = obj.GetComponentInChildren<ShipGrid>();
         foreach (var cell in shipData.data)
         {
             switch (cell.cellType)
             {
                 case CellType.Hull:
-                    Instantiate(_hullPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    var hull = Instantiate(_hullPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, hull);
                     break;
                 case CellType.Gun:
-                    Instantiate(_gunPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    var gun = Instantiate(_gunPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, gun);
                     break;
                 case CellType.Thruster:
                     var thruster = Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, thruster);
                     thruster.GetComponent<Thruster>().thrustDirection = cell.rotation.eulerAngles.y switch
                     {
                         0 => ThrustDirection.Forward,
