@@ -5,7 +5,6 @@ using UnityEngine;
 public enum CellType
 {
     Ghost,
-    Core,
     Hull,
     Gun,
     Thruster,
@@ -53,7 +52,7 @@ public class ShipCell : MonoBehaviour
         var rotation = transform.rotation.eulerAngles.y;
 
         // Forward
-        if (relativeTo.back != null)
+        if (relativeTo.back?.cellType == CellType.Hull)
         {
             if (rotation == 0)
             {
@@ -68,7 +67,7 @@ public class ShipCell : MonoBehaviour
         }
 
         // Back
-        if (relativeTo.forward != null)
+        if (relativeTo.forward?.cellType == CellType.Hull)
         {
             if (rotation == 0)
             {
@@ -83,7 +82,7 @@ public class ShipCell : MonoBehaviour
         }
 
         // Left
-        if (relativeTo.right != null)
+        if (relativeTo.right?.cellType == CellType.Hull)
         {
             if (rotation == 90)
             {
@@ -98,7 +97,7 @@ public class ShipCell : MonoBehaviour
         }
 
         // Right
-        if (relativeTo.left != null)
+        if (relativeTo.left?.cellType == CellType.Hull)
         {
             if (rotation == 90)
             {
