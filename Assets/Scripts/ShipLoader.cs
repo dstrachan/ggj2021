@@ -17,6 +17,8 @@ public class ShipLoader : MonoBehaviour
     public GameObject ImportFromJson(string json)
     {
         var shipData = JsonUtility.FromJson<ShipDataWrapper>(json);
+        if (shipData == null)
+            return null;
 
         var obj = Instantiate(_shipPrefab);
         foreach (var cell in shipData.data)
@@ -30,7 +32,15 @@ public class ShipLoader : MonoBehaviour
                     Instantiate(_gunPrefab, cell.localPosition, cell.rotation, obj.transform);
                     break;
                 case CellType.Thruster:
-                    Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    var thruster = Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
+                    thruster.GetComponent<Thruster>().thrustDirection = cell.rotation.eulerAngles.y switch
+                    {
+                        0 => ThrustDirection.Forward,
+                        90 => ThrustDirection.Right,
+                        180 => ThrustDirection.Back,
+                        270 => ThrustDirection.Left,
+                        _ => ThrustDirection.Forward,
+                    };
                     break;
             }
         }
