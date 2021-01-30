@@ -129,7 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  bulletSpeed: 1200
+  bulletSpeed: 2000
+  range: 25
   secondsBetweenShots: 0.4
   shootPoint: {fileID: 6509000712785226201}
   bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}

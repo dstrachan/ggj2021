@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     public float damage;
     public float bulletSpeed;
+    public float range;
     public float secondsBetweenShots;
 
     public Transform shootPoint;
@@ -38,7 +39,8 @@ public class Gun : MonoBehaviour
 
             projectile.speed = bulletSpeed;
             projectile.damage = damage;
-     
+            projectile.range = range;
+
             _nextPossibleShootTime = Time.time + secondsBetweenShots;           
         }
     }

@@ -64,15 +64,15 @@ public class Asteroid : MonoBehaviour
     {
         if (prefab != null)
         {
-            if (transform.localScale.x >= 1.2)
+            if (transform.localScale.x >= 1.4)
             {
-                var smallerones = Random.Range(3, 7);
+                var smallerones = Random.Range(2, 5);
 
                 for (int i = 0; i < smallerones; i++)
                 {
                     var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
 
-                    var scaler = Random.Range(transform.localScale.x / 8f, transform.localScale.x / 4f);
+                    var scaler = Random.Range(transform.localScale.x / 6f, transform.localScale.x / 4f);
 
                     asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
                 }
