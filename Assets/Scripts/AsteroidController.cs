@@ -15,32 +15,53 @@ public class AsteroidController : MonoBehaviour
     private GameObject _player;
     private float _nextPossibleSpawnTime;
 
-    // Start is called before the first frame update
+    private int AsteroidCount = 0;
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length;
+
+        //Update asteroid count every 2 seconds
+        RunEachThisManySeconds(() => AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length, 2);
     }
 
-    private List<GameObject> asteroids = new List<GameObject>();
-
-    // Update is called once per frame
     void Update()
     {
-        if(asteroids.Count < maxAsteroids && CanSpawn())
+        if (AsteroidCount < maxAsteroids && CanSpawn())
         {
-            var vector2 = UnityEngine.Random.insideUnitCircle.normalized * spawnRadius;
-            var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
-
-            var asteroid = Instantiate(prefab, pos, Quaternion.identity);
-            asteroid.transform.parent = gameObject.transform;
-
-            asteroids.Add(asteroid);
-
-            _nextPossibleSpawnTime = Time.time + (60.0f/spawnRatePerMinute);
-
+            RandomSpawn();
         }
+    }
+
+    private void RandomSpawn()
+    {
+        var vector2 = UnityEngine.Random.insideUnitCircle.normalized * spawnRadius;
+        var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
+
+        var asteroid = Instantiate(prefab, pos, Quaternion.identity);
+        asteroid.transform.parent = gameObject.transform;
+
+        var scaler = UnityEngine.Random.Range(0.5f, 2);
+        asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+
+        _nextPossibleSpawnTime = Time.time + (60.0f / spawnRatePerMinute);
     }
 
     private bool CanSpawn() => Time.time > _nextPossibleSpawnTime;
 
+    private void RunEachThisManySeconds(Action function, float seconds)
+    {
+        StartCoroutine(LoopFunc(function, seconds));
+    }
+
+    private IEnumerator LoopFunc(Action function, float seconds)
+    {
+        while (true)
+        {
+            function();
+
+            yield return new WaitForSeconds(seconds);
+        }
+    }
 }

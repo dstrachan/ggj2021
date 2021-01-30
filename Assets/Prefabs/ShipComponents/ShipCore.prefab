@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 1956069928481151339}
   - component: {fileID: 3209519148816029390}
   - component: {fileID: 823727589417722372}
+  - component: {fileID: 3214875983794349701}
+  - component: {fileID: 6350229667980097656}
   m_Layer: 0
-  m_Name: core
+  m_Name: ShipCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184037206398927825}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.53723603, y: -1.1500001, z: 2.7328715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3214875983794349701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184037206398927825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellType: 1
+--- !u!114 &6350229667980097656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184037206398927825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3edc4b65c4d2974459dc4621e4d6c794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ghostPrefab: {fileID: 5780197626734049792, guid: 450b8bdb973df9842a0d7fc93d5cbf9a, type: 3}
+  _ghostTag: Ghost

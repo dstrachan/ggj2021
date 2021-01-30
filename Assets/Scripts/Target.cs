@@ -4,25 +4,26 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class Target : MonoBehaviour
 {
-    public float HitPoints;
+    public float hitPoints;
   
-    internal bool Alive = true;
-    internal Collider Collider;
+    internal bool alive = true;
+    internal Collider collider;
 
-    public UnityEvent DeadEvents;
+    public UnityEvent deadEvents;
 
     // Use this for initialization
     void Awake()
     {
-        Collider = GetComponent<Collider>();
+        collider = GetComponent<Collider>();
     }
 
     void Update()
     {
-        if (HitPoints <= 0)
+        if (hitPoints <= 0)
         {
-            Alive = false;
-            DeadEvents?.Invoke();
+            alive = false;
+
+            deadEvents?.Invoke();
         }     
     }   
 

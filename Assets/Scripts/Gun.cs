@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public float Damage;
-    public float BulletSpeed;
-    public float SecondsBetweenShots;
+    public float damage;
+    public float bulletSpeed;
+    public float secondsBetweenShots;
 
-    public Transform ShootPoint;
+    public Transform shootPoint;
 
-    public GameObject Bullet;
+    public GameObject bullet;
 
     private float _nextPossibleShootTime;
 
@@ -32,14 +32,14 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {        
-            var bullet = Instantiate(Bullet, ShootPoint.position, transform.rotation);
+            var bullet = Instantiate(this.bullet, shootPoint.position, transform.rotation);
 
             var projectile = bullet.GetComponent<Projectile>();
 
-            projectile.Speed = BulletSpeed;
-            projectile.Damage = Damage;
+            projectile.speed = bulletSpeed;
+            projectile.damage = damage;
      
-            _nextPossibleShootTime = Time.time + SecondsBetweenShots;           
+            _nextPossibleShootTime = Time.time + secondsBetweenShots;           
         }
     }
 
