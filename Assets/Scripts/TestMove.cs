@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -82,10 +80,13 @@ public class TestMove : MonoBehaviour
 
             NextPrefab();
         }
-        
+
         if (Input.GetMouseButtonDown(1))
         {
-            _grid.Export();
+            //_grid.ExportToPlayerPrefs("ship");
+            //SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);
+            SceneManager.MoveGameObjectToScene(_grid.gameObject, SceneManager.GetSceneByBuildIndex(1));
         }
     }
 
