@@ -12,6 +12,11 @@ public class ShipGrid : MonoBehaviour
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
 
+    [SerializeField] private GameObject _corePrefab;
+    [SerializeField] private GameObject _hullPrefab;
+    [SerializeField] private GameObject _gunPrefab;
+    [SerializeField] private GameObject _thrusterPrefab;
+
     private bool _needsUpdate;
 
     private void Awake()
@@ -92,7 +97,6 @@ public class ShipGrid : MonoBehaviour
         {
             switch (cell.Value.cellType)
             {
-                case CellType.Core:
                 case CellType.Hull:
                     keys.Add(cell.Key);
                     break;
@@ -126,5 +130,26 @@ public class ShipGrid : MonoBehaviour
         shipCell.x = x;
         shipCell.y = y;
         Set(x, y, shipCell);
+    }
+
+    public GameObject Export()
+    {
+        var obj = Instantiate(_corePrefab);
+        foreach (var cell in cells.Values)
+        {
+            switch (cell.cellType)
+            {
+                case CellType.Hull:
+                    Instantiate(_hullPrefab, cell.transform.localPosition, cell.transform.rotation, obj.transform);
+                    break;
+                case CellType.Gun:
+                    Instantiate(_gunPrefab, cell.transform.localPosition, cell.transform.rotation, obj.transform);
+                    break;
+                case CellType.Thruster:
+                    Instantiate(_thrusterPrefab, cell.transform.localPosition, cell.transform.rotation, obj.transform);
+                    break;
+            }
+        }
+        return obj;
     }
 }

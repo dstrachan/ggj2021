@@ -82,6 +82,11 @@ public class TestMove : MonoBehaviour
 
             NextPrefab();
         }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            _grid.Export();
+        }
     }
 
     private void FixedUpdate()
