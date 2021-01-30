@@ -52,9 +52,16 @@ public class ShipGrid : MonoBehaviour
         cells[(x, y)] = value;
     }
 
-    public void Add(int x, int y, GameObject prefab)
+    public void Add(int x, int y, GameObject obj)
     {
-        InstantiateCell(x, y, prefab, Get(x, y).transform.position);
+        obj.transform.parent = transform;
+        obj.transform.position = Get(x, y).transform.position;
+
+        var shipCell = obj.GetComponent<ShipCell>();
+        shipCell.x = x;
+        shipCell.y = y;
+        Set(x, y, shipCell);
+
         UpdateGhosts();
     }
 

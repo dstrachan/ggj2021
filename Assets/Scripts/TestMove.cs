@@ -36,15 +36,17 @@ public class TestMove : MonoBehaviour
     {
         var index = Random.Range(0, _shipPrefabs.Length);
         _currentPrefab = _shipPrefabs[index];
-        if (_child != null)
-        {
-            Destroy(_child);
-        }
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
     }
 
     private void Update()
     {
+        var scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0)
+        {
+            _child.transform.Rotate(Vector3.up, 90 * scroll);
+        }
+
         if (_currentSquare == null)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,12 +63,12 @@ public class TestMove : MonoBehaviour
             var ghost = _currentSquare.gameObject;
             if (ghost == _bin)
             {
-                NextPrefab();
+                Destroy(_child);
             }
             else
             {
                 var shipCell = ghost.GetComponent<ShipCell>();
-                _grid.Add(shipCell.x, shipCell.y, _currentPrefab);
+                _grid.Add(shipCell.x, shipCell.y, _child);
             }
 
             _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
