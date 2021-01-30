@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
-
     private Rigidbody _rigidbody;
 
     private Thruster[] _allThrusters;
@@ -23,6 +23,7 @@ public class ShipController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.isKinematic = SceneManager.GetActiveScene().name == "Shop";
         _allThrusters = GetComponentsInChildren<Thruster>();
 
         var angles = _allThrusters.Select(w => w.transform.eulerAngles).ToArray();
