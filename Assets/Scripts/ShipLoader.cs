@@ -11,13 +11,7 @@ public class ShipLoader : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake");
-    }
-
-    private void Start()
-    {
-        var obj = ImportFromPlayerPrefs("ship");
-        Camera.main.GetComponent<CameraFollow>().target = obj.transform;
+        ImportFromPlayerPrefs("ship");
     }
 
     public GameObject ImportFromJson(string json)
