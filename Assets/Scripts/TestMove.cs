@@ -11,6 +11,7 @@ public class TestMove : MonoBehaviour
 
     private GameObject _currentPrefab;
     private GameObject _child;
+    private Plane _plane;
 
     [SerializeField] private GameObject[] _shipPrefabs;
     [SerializeField] private GameObject _ghostPrefab;
@@ -27,7 +28,8 @@ public class TestMove : MonoBehaviour
 
     private void Start()
     {
-        _grid.Get(0, 0).SpawnGhosts(_ghostPrefab);
+        _grid.UpdateGhosts();
+        _plane = new Plane(Vector3.up, 0);
     }
 
     private void NextPrefab()
@@ -45,10 +47,8 @@ public class TestMove : MonoBehaviour
     {
         if (_currentSquare == null)
         {
-            var plane = new Plane(Vector3.up, 0);
-
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out var distance))
+            if (_plane.Raycast(ray, out var distance))
             {
                 var point = ray.GetPoint(distance);
                 point.y = 0;
@@ -65,11 +65,8 @@ public class TestMove : MonoBehaviour
             }
             else
             {
-                var parentNode = ghost.transform.parent.GetComponent<ShipCell>();
-
-                // TODO: Replace nodePrefab/ghostPrefab with actual ship nodes
-                var childNode = parentNode.AddNode(_currentPrefab, ghost.transform.position);
-                childNode?.SpawnGhosts(_ghostPrefab);
+                var shipCell = ghost.GetComponent<ShipCell>();
+                _grid.Add(shipCell.x, shipCell.y, _currentPrefab);
             }
 
             _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
