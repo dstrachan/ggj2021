@@ -7,11 +7,14 @@ public class AsteroidController : MonoBehaviour
 {
     public int maxAsteroids;
     public int spawnRadius;
-    public int spawnRatePerMinute;
 
-    public UnityEngine.Object prefab;
+    public float spawnRatePerMinute;
 
-    GameObject _player;
+    public GameObject prefab;
+
+    private GameObject _player;
+    private float _nextPossibleSpawnTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +26,21 @@ public class AsteroidController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(asteroids.Count < maxAsteroids)
+        if(asteroids.Count < maxAsteroids && CanSpawn())
         {
             var vector2 = UnityEngine.Random.insideUnitCircle.normalized * spawnRadius;
             var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
 
-            GameObject asteroid = Instantiate(prefab, pos, Quaternion.identity) as GameObject;
+            var asteroid = Instantiate(prefab, pos, Quaternion.identity);
             asteroid.transform.parent = gameObject.transform;
 
             asteroids.Add(asteroid);
+
+            _nextPossibleSpawnTime = Time.time + (60.0f/spawnRatePerMinute);
+
         }
     }
+
+    private bool CanSpawn() => Time.time > _nextPossibleSpawnTime;
+
 }
