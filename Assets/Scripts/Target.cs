@@ -7,14 +7,14 @@ public class Target : MonoBehaviour
     public float hitPoints;
   
     internal bool alive = true;
-    internal Collider collider;
+    //internal Collider collider;
 
     public UnityEvent deadEvents;
 
     // Use this for initialization
     void Awake()
     {
-        collider = GetComponent<Collider>();
+        //collider = GetComponent<Collider>();
     }
 
     void Update()

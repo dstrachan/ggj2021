@@ -112,3 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ghostPrefab: {fileID: 5780197626734049792, guid: 450b8bdb973df9842a0d7fc93d5cbf9a, type: 3}
   _ghostTag: Ghost
+  _shipPrefab: {fileID: 3299420318512661945, guid: b8380a77a4e187d4db16759485592130, type: 3}
+  _hullPrefab: {fileID: 39174816975284584, guid: 052f7819bd38f494bb9f3fab5906a9f1, type: 3}
+  _gunPrefab: {fileID: 9204143974621766841, guid: 5e93c6b48c043da4abf0b2ec0fdcead0, type: 3}
+  _thrusterPrefab: {fileID: 6421152851246742724, guid: 0c63dc1a0df5b89448d0021871528085, type: 3}

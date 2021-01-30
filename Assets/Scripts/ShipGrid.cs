@@ -12,7 +12,10 @@ public class ShipGrid : MonoBehaviour
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
 
-    private bool _needsUpdate;
+    [SerializeField] private GameObject _shipPrefab;
+    [SerializeField] private GameObject _hullPrefab;
+    [SerializeField] private GameObject _gunPrefab;
+    [SerializeField] private GameObject _thrusterPrefab;
 
     private void Awake()
     {
@@ -22,15 +25,6 @@ public class ShipGrid : MonoBehaviour
         }
 
         cells[(0, 0)] = GetComponent<ShipCell>();
-    }
-
-    private void LateUpdate()
-    {
-        if (_needsUpdate)
-        {
-            ReorderHierarchy(cells[(0, 0)].transform, 0);
-            _needsUpdate = false;
-        }
     }
 
     public ShipCell Get(int x, int y)
@@ -127,4 +121,42 @@ public class ShipGrid : MonoBehaviour
         shipCell.y = y;
         Set(x, y, shipCell);
     }
+
+    public string ExportToJson()
+    {
+        var shipData = new ShipDataWrapper();
+        foreach (var cell in cells.Values)
+        {
+            switch (cell.cellType)
+            {
+                case CellType.Hull:
+                case CellType.Gun:
+                case CellType.Thruster:
+                    shipData.data.Add(new ShipData
+                    {
+                        cellType = cell.cellType,
+                        localPosition = cell.transform.localPosition,
+                        rotation = cell.transform.rotation
+                    });
+                    break;
+            }
+        }
+        return JsonUtility.ToJson(shipData);
+    }
+
+    public void ExportToPlayerPrefs(string key) => PlayerPrefs.SetString(key, ExportToJson());
+}
+
+[Serializable]
+public class ShipData
+{
+    public Vector3 localPosition;
+    public Quaternion rotation;
+    public CellType cellType;
+}
+
+[Serializable]
+public class ShipDataWrapper
+{
+    public List<ShipData> data = new List<ShipData>();
 }

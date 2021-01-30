@@ -39,7 +39,7 @@ public class AsteroidController : MonoBehaviour
             var asteroid = Instantiate(prefab, pos, Quaternion.identity);
             asteroid.transform.parent = gameObject.transform;
 
-            var scaler = UnityEngine.Random.Range(0.5f, 2);
+            var scaler = Random.Range(0.5f, 2);
             asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
 
             _nextPossibleSpawnTime = Time.time + (60.0f / spawnRatePerMinute);
