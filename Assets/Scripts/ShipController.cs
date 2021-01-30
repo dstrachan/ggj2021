@@ -22,9 +22,9 @@ public class ShipController : MonoBehaviour
 
         var angles = _allThrusters.Select(w => w.transform.eulerAngles).ToArray();
 
-        _rightThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 90).ToArray();
-        _leftThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 270).ToArray();
-        _rearThrusters = _allThrusters.Where(w => w.transform.eulerAngles.y == 0).ToArray();
+        _rightThrusters = _allThrusters.Where(w => w.ThrustDirection == ThrustDirection.Right).ToArray();
+        _leftThrusters = _allThrusters.Where(w => w.ThrustDirection == ThrustDirection.Left).ToArray();
+        _rearThrusters = _allThrusters.Where(w => w.ThrustDirection == ThrustDirection.Forward).ToArray();
 
     }
 
