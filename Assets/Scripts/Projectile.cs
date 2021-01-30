@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
-    public float maxDistance;
+    public float range;
 
     private Rigidbody _rigidbody;
     private GameObject _player;
@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(Vector3.Distance(_player.transform.position, transform.position) > maxDistance)
+        if(Vector3.Distance(_player.transform.position, transform.position) > range)
         {
             Destroy(gameObject);
         }
