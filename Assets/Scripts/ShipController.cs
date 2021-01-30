@@ -61,9 +61,10 @@ public class ShipController : MonoBehaviour
 
         foreach (var thruster in _allThrusters)
         {
-            if (thruster.lightEffect != null)
+            if (thruster.thrustEffect != null)
             {
-                thruster.lightEffect.enabled = false;
+                thruster.thrustEffect.gameObject.SetActive(false);
+                thruster.thrustEffect.Stop();
             }
         }
 
@@ -90,9 +91,11 @@ public class ShipController : MonoBehaviour
         {
             _rigidbody.AddForceAtPosition(thruster.thrustForce * (thruster.transform.forward) * Time.deltaTime, thruster.transform.position);
 
-            if (thruster.lightEffect != null)
+            if (thruster.thrustEffect != null)
             {
-                thruster.lightEffect.enabled = true;
+                thruster.thrustEffect.gameObject.SetActive(true);
+
+                thruster.thrustEffect.Play();
             }
         }
     }
