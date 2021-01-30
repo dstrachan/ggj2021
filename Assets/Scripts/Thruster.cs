@@ -10,16 +10,16 @@ public enum ThrustDirection
 }
 public class Thruster : MonoBehaviour
 {
-    public float ThrustForce;
-    public ThrustDirection ThrustDirection;
+    public float thrustForce;
+    public ThrustDirection thrustDirection;
 
-    internal Light LightEffect;
+    internal Light lightEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-        LightEffect = GetComponentInChildren<Light>();
-        LightEffect.enabled = false;
+        lightEffect = GetComponentInChildren<Light>();
+        lightEffect.enabled = false;
     }
 
     // Update is called once per frame

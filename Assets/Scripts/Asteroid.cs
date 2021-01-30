@@ -7,7 +7,7 @@ public class Asteroid : MonoBehaviour
     public float distanceToDestroy;
 
     public float maxRotation;
-    public float minRotation;
+    public float MinRotation;
 
     public float maxVelocity;
     public float minVelocity;
@@ -16,6 +16,8 @@ public class Asteroid : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GameObject _player;
+
+    public GameObject prefab;
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class Asteroid : MonoBehaviour
         dir = Quaternion.AngleAxis(Random.Range(-accuracyPenalty, accuracyPenalty), Vector3.up) * dir;      
 
         _rigidbody.AddForce(dir * -Random.Range(minVelocity, maxVelocity));
-        _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, minRotation), 0, Random.Range(maxRotation, minRotation)));
+        _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, MinRotation), 0, Random.Range(maxRotation, MinRotation)));
     }
 
     void Update()
@@ -42,6 +44,20 @@ public class Asteroid : MonoBehaviour
 
     public void AsteroidDestroyed()
     {
+
+        if(transform.localScale.x > 0.9)
+        {
+   
+            //var pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+
+            var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
+
+            var scaler = Random.Range(transform.localScale.x / 3f, transform.localScale.x);
+            asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+
+            
+        }
         Destroy(gameObject);
+
     }
 }

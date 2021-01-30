@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class ShipCell : MonoBehaviour
 {
-    public int X { get; private set; }
-    public int Y { get; private set; }
+    public int x { get; private set; }
+    public int y { get; private set; }
 
     public ShipCell Forward
     {
-        get => _grid.Get(X, Y + 1);
-        set => _grid.Set(X, Y + 1, value);
+        get => _grid.Get(x, y + 1);
+        set => _grid.Set(x, y + 1, value);
     }
     public ShipCell Back
     {
-        get => _grid.Get(X, Y - 1);
-        set => _grid.Set(X, Y - 1, value);
+        get => _grid.Get(x, y - 1);
+        set => _grid.Set(x, y - 1, value);
     }
     public ShipCell Left
     {
-        get => _grid.Get(X - 1, Y);
-        set => _grid.Set(X - 1, Y, value);
+        get => _grid.Get(x - 1, y);
+        set => _grid.Set(x - 1, y, value);
     }
     public ShipCell Right
     {
-        get => _grid.Get(X + 1, Y);
-        set => _grid.Set(X + 1, Y, value);
+        get => _grid.Get(x + 1, y);
+        set => _grid.Set(x + 1, y, value);
     }
 
     public bool IsGhost => tag.Equals("Ghost");
@@ -43,8 +43,8 @@ public class ShipCell : MonoBehaviour
         var shipCell = obj.GetComponent<ShipCell>();
         if (shipCell != null)
         {
-            shipCell.X = X + (int)offset.x;
-            shipCell.Y = Y + (int)offset.z;
+            shipCell.x = x + (int)offset.x;
+            shipCell.y = y + (int)offset.z;
         }
         return shipCell;
     }

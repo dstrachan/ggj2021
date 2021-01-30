@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float Speed;
-    public float Damage;
-    internal float TimeAlive;
+    public float speed;
+    public float damage;
+    internal float timeAlive;
 
     private Rigidbody _rigidbody;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        TimeAlive = 0;
+        timeAlive = 0;
 
     }
     void FixedUpdate()
     {
-        TimeAlive += Time.deltaTime;
+        timeAlive += Time.deltaTime;
 
         // Just destroy after a while
-        if (TimeAlive > 5)
+        if (timeAlive > 5)
         {
             Destroy(gameObject);
         }
 
         //var nextPosition = transform.forward * Speed * Time.deltaTime;
-        _rigidbody.velocity = transform.forward * Speed * Time.deltaTime;
+        _rigidbody.velocity = transform.forward * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
 
         if (target != null)
         {           
-            target.HitPoints -= Damage;
+            target.hitPoints -= damage;
             Destroy(gameObject);          
         }
     }

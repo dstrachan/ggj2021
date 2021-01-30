@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ShipGrid : MonoBehaviour
 {
-    public Dictionary<(int, int), ShipCell> Cells { get; } = new Dictionary<(int, int), ShipCell>();
+    public Dictionary<(int, int), ShipCell> cells { get; } = new Dictionary<(int, int), ShipCell>();
 
     private bool _needsUpdate;
     private ShipCell _root;
@@ -16,7 +16,7 @@ public class ShipGrid : MonoBehaviour
     private void Awake()
     {
         _root = GetComponent<ShipCell>();
-        Cells[(0, 0)] = _root;
+        cells[(0, 0)] = _root;
     }
 
     private void Start()
@@ -31,16 +31,16 @@ public class ShipGrid : MonoBehaviour
     {
         if (_needsUpdate)
         {
-            ReorderHierarchy(Cells[(0, 0)].transform, 0);
+            ReorderHierarchy(cells[(0, 0)].transform, 0);
             _needsUpdate = false;
         }
     }
 
     public ShipCell Get(int x, int y)
     {
-        if (Cells.ContainsKey((x, y)))
+        if (cells.ContainsKey((x, y)))
         {
-            return Cells[(x, y)];
+            return cells[(x, y)];
         }
         return null;
     }
@@ -52,7 +52,7 @@ public class ShipGrid : MonoBehaviour
         {
             Destroy(shipCell.gameObject);
         }
-        Cells[(x, y)] = value;
+        cells[(x, y)] = value;
 
         _needsUpdate = true;
     }

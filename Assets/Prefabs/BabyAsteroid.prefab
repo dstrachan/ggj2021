@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1860091033788358672
+--- !u!1 &7726358959561877375
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1340821840874470058}
-  - component: {fileID: 2680862002022675727}
-  - component: {fileID: 202840656294937029}
-  - component: {fileID: 1093969685573916459}
-  - component: {fileID: -7863035591081475355}
-  - component: {fileID: 7413634344339657435}
-  - component: {fileID: 9047075505059955243}
+  - component: {fileID: 6949716290976611781}
+  - component: {fileID: 6331359246137487968}
+  - component: {fileID: 8086625420179932842}
+  - component: {fileID: 9063313771373678660}
+  - component: {fileID: 6920122445938181514}
+  - component: {fileID: 1444337514710029748}
+  - component: {fileID: 1109151338378495300}
   m_Layer: 0
-  m_Name: asteroid 1
+  m_Name: BabyAsteroid
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1340821840874470058
+--- !u!4 &6949716290976611781
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_LocalRotation: {x: -0.71479976, y: -0.042132128, z: 0.060864218, w: 0.6954004}
-  m_LocalPosition: {x: -1.4774346, y: -0.6176746, z: 1.4933987}
+  m_LocalPosition: {x: 69.86188, y: -0.6175773, z: -200.59937}
   m_LocalScale: {x: 1.3364533, y: 0.9999463, z: 0.9366558}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2680862002022675727
+--- !u!33 &6331359246137487968
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_Mesh: {fileID: 289301614986012343, guid: 667c73edee57d494aaa8a2c8b63f762f, type: 3}
---- !u!23 &202840656294937029
+--- !u!23 &8086625420179932842
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1093969685573916459
+--- !u!114 &9063313771373678660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc97fe7461c0854d81f84464f445de6, type: 3}
@@ -104,14 +104,14 @@ MonoBehaviour:
   maxVelocity: 500
   minVelocity: 100
   accuracyPenalty: 50
-  prefab: {fileID: 1860091033788358672}
---- !u!54 &-7863035591081475355
+  prefab: {fileID: 7726358959561877375}
+--- !u!54 &6920122445938181514
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -121,13 +121,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &7413634344339657435
+--- !u!114 &1444337514710029748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52f42aba81d536f48a7b3cc0eb75a7ed, type: 3}
@@ -137,7 +137,7 @@ MonoBehaviour:
   DeadEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1093969685573916459}
+      - m_Target: {fileID: 9063313771373678660}
         m_TargetAssemblyTypeName: Asteroid, Assembly-CSharp
         m_MethodName: AsteroidDestroyed
         m_Mode: 1
@@ -149,13 +149,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!136 &9047075505059955243
+--- !u!136 &1109151338378495300
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091033788358672}
+  m_GameObject: {fileID: 7726358959561877375}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
