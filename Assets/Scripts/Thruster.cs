@@ -19,6 +19,7 @@ public class Thruster : MonoBehaviour
     void Start()
     {
         thrustEffect = GetComponentInChildren<ParticleSystem>();
+        thrustEffect.Stop();
     }
 
     // Update is called once per frame
