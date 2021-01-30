@@ -13,13 +13,13 @@ public class Thruster : MonoBehaviour
     public float thrustForce;
     public ThrustDirection thrustDirection;
 
-    internal Light lightEffect;
+    internal ParticleSystem thrustEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-        lightEffect = GetComponentInChildren<Light>();
-        lightEffect.enabled = false;
+        thrustEffect = GetComponentInChildren<ParticleSystem>();
+        thrustEffect.Stop();
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
-    public float maxDistance;
+    public float range;
 
     private Rigidbody _rigidbody;
     private GameObject _player;
@@ -20,13 +20,13 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(Vector3.Distance(_player.transform.position, transform.position) > maxDistance)
+        if(Vector3.Distance(_player.transform.position, transform.position) > range)
         {
             Destroy(gameObject);
         }
 
         //var nextPosition = transform.forward * Speed * Time.deltaTime;
-        _rigidbody.velocity = transform.forward * speed * Time.deltaTime;
+        _rigidbody.velocity = _player.GetComponent<Rigidbody>().velocity + transform.forward * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision collision)

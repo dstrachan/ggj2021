@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
-
     private Rigidbody _rigidbody;
 
     private Thruster[] _allThrusters;
@@ -23,6 +23,7 @@ public class ShipController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.isKinematic = SceneManager.GetActiveScene().name == "Shop";
         _allThrusters = GetComponentsInChildren<Thruster>();
 
         var angles = _allThrusters.Select(w => w.transform.eulerAngles).ToArray();
@@ -33,18 +34,18 @@ public class ShipController : MonoBehaviour
 
     }
 
-    void OnDrawGizmos()
-    {
-        // Draws a 5 unit long red line in front of the object
-        Gizmos.color = Color.red;
+    //void OnDrawGizmos()
+    //{
+    //    // Draws a 5 unit long red line in front of the object
+    //    Gizmos.color = Color.red;
 
-        if (_player != null)
-        {
-            var playerVelocity = _player.GetComponent<Rigidbody>().velocity;
+    //    if (_player != null)
+    //    {
+    //        var playerVelocity = _player.GetComponent<Rigidbody>().velocity;
 
-            Gizmos.DrawRay(transform.position, playerVelocity);
-        }
-    }
+    //        Gizmos.DrawRay(transform.position, playerVelocity);
+    //    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
@@ -61,7 +62,11 @@ public class ShipController : MonoBehaviour
 
         foreach (var thruster in _allThrusters)
         {
-            thruster.lightEffect.enabled = false;
+            if (thruster.thrustEffect != null)
+            {
+                thruster.thrustEffect.gameObject.SetActive(false);
+                thruster.thrustEffect.Stop();
+            }
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -86,7 +91,13 @@ public class ShipController : MonoBehaviour
         foreach (var thruster in thrusters)
         {
             _rigidbody.AddForceAtPosition(thruster.thrustForce * (thruster.transform.forward) * Time.deltaTime, thruster.transform.position);
-            thruster.lightEffect.enabled = true;
+
+            if (thruster.thrustEffect != null)
+            {
+                thruster.thrustEffect.gameObject.SetActive(true);
+
+                thruster.thrustEffect.Play();
+            }
         }
     }
 }
