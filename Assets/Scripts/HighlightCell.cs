@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class HighlightCell : MonoBehaviour
 {
-    [SerializeField] private Material _highlightMaterial;
+    [SerializeField] private Material _highlightBadMaterial;
+    [SerializeField] private Material _highlightGoodMaterial;
 
     private Renderer _renderer;
     private Material _originalMaterial;
@@ -16,9 +17,14 @@ public class HighlightCell : MonoBehaviour
         _originalMaterial = _renderer.material;
     }
 
-    public void Highlight()
+    public void HighlightGood()
     {
-        _renderer.material = _highlightMaterial;
+        _renderer.material = _highlightGoodMaterial;
+    }
+
+    public void HighlightBad()
+    {
+        _renderer.material = _highlightBadMaterial;
     }
 
     public void ResetHighlight()
