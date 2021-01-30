@@ -101,9 +101,10 @@ MonoBehaviour:
   distanceToDestroy: 100
   maxRotation: 100
   MinRotation: 0
-  maxVelocity: 500
+  maxVelocity: 300
   minVelocity: 100
   accuracyPenalty: 50
+  DeadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
   prefab: {fileID: 0}
 --- !u!54 &6920122445938181514
 Rigidbody:

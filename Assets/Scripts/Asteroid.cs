@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Asteroid : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class Asteroid : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GameObject _player;
+    public ParticleSystem DeadEffect;
 
     public GameObject prefab;
 
@@ -46,22 +49,27 @@ public class Asteroid : MonoBehaviour
     {
         if (prefab != null)
         {
-            if (transform.localScale.x >= 1.3)
+            if (transform.localScale.x >= 1.2)
             {
-                //var pos = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
-                var smallerones = Random.Range(4, 7);
+                var smallerones = Random.Range(3, 7);
 
                 for (int i = 0; i < smallerones; i++)
                 {
                     var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
 
                     var scaler = Random.Range(transform.localScale.x / 8f, transform.localScale.x / 4f);
+
                     asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
                 }
             }
 
         }
+
+        var deadEffect = Instantiate(DeadEffect, transform.position, Quaternion.identity);
+        deadEffect.GetComponent<AutoDelete>().Started = true;
         Destroy(gameObject);
 
     }
+
+
 }
