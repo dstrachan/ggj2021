@@ -6,10 +6,20 @@ public class ShipGrid : MonoBehaviour
 {
     public Dictionary<(int, int), ShipCell> Cells { get; } = new Dictionary<(int, int), ShipCell>();
 
-    private void Start()
+    private bool needsUpdate;
+
+    private void Awake()
     {
-        var shipCell = GetComponent<ShipCell>();
-        Set(0, 0, shipCell);
+        Cells[(0, 0)] = GetComponent<ShipCell>();
+    }
+
+    private void LateUpdate()
+    {
+        if (needsUpdate)
+        {
+            ReorderHierarchy(Cells[(0, 0)].transform, 0);
+            needsUpdate = false;
+        }
     }
 
     public ShipCell Get(int x, int y)
@@ -29,24 +39,17 @@ public class ShipGrid : MonoBehaviour
             Destroy(shipCell.gameObject);
         }
         Cells[(x, y)] = value;
+
+        needsUpdate = true;
     }
 
-    //public void ClearHighlight(Color color)
-    //{
-    //    foreach (var cell in Cells)
-    //    {
-    //        cell.Value.GetComponent<Renderer>().material.color = cell.Value.IsGhost ? color : Color.white;
-    //    }
-    //}
-
-    //public void Highlight(int x, int y, Color color, Color highlightColor)
-    //{
-    //    ClearHighlight(color);
-
-    //    var shipCell = Get(x, y);
-    //    if (shipCell != null && shipCell.IsGhost)
-    //    {
-    //        shipCell.GetComponent<Renderer>().material.color = highlightColor;
-    //    }
-    //}
+    private void ReorderHierarchy(Transform root, int depth)
+    {
+        for (var i = 0; i < root.childCount; i++)
+        {
+            var child = root.GetChild(i);
+            ReorderHierarchy(child.transform, depth + 1);
+            Debug.Log($"{depth} : {child.GetComponent<ShipCell>()}");
+        }
+    }
 }

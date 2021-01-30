@@ -61,7 +61,7 @@ public class TestMove : MonoBehaviour
             currentSquare.GetComponent<Renderer>().material.color = highlightMaterial.color;
             transform.position = currentSquare.transform.position;
         }
-        else
+        else if (currentSquare != null)
         {
             currentSquare.GetComponent<Renderer>().material.color = ghostMaterial.color;
             currentSquare = null;
