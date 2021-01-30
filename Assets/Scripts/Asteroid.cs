@@ -66,7 +66,7 @@ public class Asteroid : MonoBehaviour
         {
             if (transform.localScale.x >= 1.4)
             {
-                var smallerones = Random.Range(2, 5);
+                var smallerones = Random.Range(3, 6);
 
                 for (int i = 0; i < smallerones; i++)
                 {
