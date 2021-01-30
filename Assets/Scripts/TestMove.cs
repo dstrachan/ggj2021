@@ -73,6 +73,7 @@ public class TestMove : MonoBehaviour
 
                 var shipCell = ghost.GetComponent<ShipCell>();
                 _grid.Add(shipCell.x, shipCell.y, _child);
+                _grid.UpdateGhosts();
             }
 
             _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
