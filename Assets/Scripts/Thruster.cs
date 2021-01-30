@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ThrustDirection
+{ 
+    Forward,
+    Left,
+    Right
+}
 public class Thruster : MonoBehaviour
 {
     public float ThrustForce;
+    public ThrustDirection ThrustDirection;
 
     internal Light LightEffect;
 
