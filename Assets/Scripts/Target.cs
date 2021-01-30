@@ -22,6 +22,7 @@ public class Target : MonoBehaviour
         if (HitPoints <= 0)
         {
             Alive = false;
+            Destroy(gameObject);
             DeadEvents?.Invoke();
         }     
     }   

@@ -43,10 +43,7 @@ public class Projectile : MonoBehaviour
         if (target != null)
         {           
             target.HitPoints -= Damage;
-            if (target.Alive == false)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);          
         }
     }
 
