@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da20a16d8f37ec14e97501db148a1e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrustForce: 0
-  ThrustDirection: 0
+  thrustForce: 50
+  thrustDirection: 2
 --- !u!54 &-3969029849398351775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -236,4 +236,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ghostPrefab: {fileID: 0}
+  cellType: 4

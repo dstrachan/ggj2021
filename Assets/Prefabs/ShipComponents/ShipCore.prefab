@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellType: 1
 --- !u!114 &6350229667980097656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3edc4b65c4d2974459dc4621e4d6c794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ghostPrefab: {fileID: 5780197626734049792, guid: 450b8bdb973df9842a0d7fc93d5cbf9a, type: 3}
+  _ghostTag: Ghost

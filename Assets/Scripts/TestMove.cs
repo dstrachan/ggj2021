@@ -11,14 +11,14 @@ public class TestMove : MonoBehaviour
 
     private GameObject _currentPrefab;
     private GameObject _child;
+    private Plane _plane;
 
-    [SerializeField] private Material _ghostMaterial;
-    [SerializeField] private Material _highlightMaterial;
     [SerializeField] private GameObject[] _shipPrefabs;
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
     [SerializeField] private LayerMask _ghostLayer;
     [SerializeField] private string _shopScene;
+    [SerializeField] private GameObject _bin;
 
     private void Awake()
     {
@@ -28,28 +28,32 @@ public class TestMove : MonoBehaviour
 
     private void Start()
     {
-        _grid.Get(0, 0).SpawnGhosts(_ghostPrefab);
+        _grid.UpdateGhosts();
+        _plane = new Plane(Vector3.up, 0);
     }
 
     private void NextPrefab()
     {
         var index = Random.Range(0, _shipPrefabs.Length);
         _currentPrefab = _shipPrefabs[index];
-        if (_child != null)
-        {
-            Destroy(_child);
-        }
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
     }
 
     private void Update()
     {
+        var scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0)
+        {
+            if (_child.GetComponent<ShipCell>().cellType != CellType.Hull)
+            {
+                _child.transform.Rotate(Vector3.up, 90 * scroll);
+            }
+        }
+
         if (_currentSquare == null)
         {
-            var plane = new Plane(Vector3.up, 0);
-
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out var distance))
+            if (_plane.Raycast(ray, out var distance))
             {
                 var point = ray.GetPoint(distance);
                 point.y = 0;
@@ -60,13 +64,20 @@ public class TestMove : MonoBehaviour
         else if (Input.GetMouseButtonDown(0))
         {
             var ghost = _currentSquare.gameObject;
-            var parentNode = ghost.transform.parent.GetComponent<ShipCell>();
+            if (ghost == _bin)
+            {
+                Destroy(_child);
+            }
+            else
+            {
+                if (!_child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+                    return;
 
-            // TODO: Replace nodePrefab/ghostPrefab with actual ship nodes
-            var childNode = parentNode.AddNode(_currentPrefab, ghost.transform.position);
-            childNode?.SpawnGhosts(_ghostPrefab);
+                var shipCell = ghost.GetComponent<ShipCell>();
+                _grid.Add(shipCell.x, shipCell.y, _child);
+            }
 
-            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             _currentSquare = null;
 
             NextPrefab();
@@ -81,15 +92,23 @@ public class TestMove : MonoBehaviour
         {
             if (_currentSquare != null)
             {
-                _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+                _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             }
+
             _currentSquare = _results[0].collider;
-            _currentSquare.GetComponent<Renderer>().material.color = _highlightMaterial.color;
+            if (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+            {
+                _currentSquare.GetComponent<HighlightCell>().HighlightGood();
+            }
+            else
+            {
+                _currentSquare.GetComponent<HighlightCell>().HighlightBad();
+            }
             transform.position = _currentSquare.transform.position;
         }
         else if (_currentSquare != null)
         {
-            _currentSquare.GetComponent<Renderer>().material.color = _ghostMaterial.color;
+            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
             _currentSquare = null;
         }
     }

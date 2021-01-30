@@ -100,11 +100,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToDestroy: 100
   maxRotation: 100
-  minRotation: -200
-  maxVelocity: 500
+  MinRotation: 0
+  maxVelocity: 300
   minVelocity: 100
   accuracyPenalty: 50
-  prefab: {fileID: 7726358959561877375}
+  DeadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
+  prefab: {fileID: 0}
 --- !u!54 &6920122445938181514
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,8 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f42aba81d536f48a7b3cc0eb75a7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPoints: 50
-  DeadEvents:
+  hitPoints: 50
+  deadEvents:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9063313771373678660}

@@ -128,11 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1504e46e2dc4e34d98d8776924352b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
-  BulletSpeed: 20
-  SecondsBetweenShots: 0.3
-  ShootPoint: {fileID: 6509000712785226201}
-  Bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}
+  damage: 30
+  bulletSpeed: 1200
+  secondsBetweenShots: 0.3
+  shootPoint: {fileID: 6509000712785226201}
+  bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}
 --- !u!114 &5624383966747387333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7086911e3b5a4b42acee6a6cde36050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ghostPrefab: {fileID: 0}
+  cellType: 3
