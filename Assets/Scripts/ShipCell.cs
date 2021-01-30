@@ -64,7 +64,7 @@ public class ShipCell : MonoBehaviour
 
     private ShipCell InstantiateNode(GameObject prefab, Vector3 offset)
     {
-        var obj = Instantiate(prefab, transform.position + offset, transform.rotation, transform.root);
+        var obj = Instantiate(prefab, transform.position + offset, transform.rotation, transform);
         var shipCell = obj.GetComponent<ShipCell>();
         if (shipCell != null)
         {

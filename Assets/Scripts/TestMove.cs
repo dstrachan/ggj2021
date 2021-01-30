@@ -35,7 +35,7 @@ public class TestMove : MonoBehaviour
                 transform.position = point;
             }
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButtonDown(0))
         {
             var ghost = currentSquare.gameObject;
             var shipNode = ghost.transform.parent.GetComponent<ShipCell>();
@@ -43,6 +43,7 @@ public class TestMove : MonoBehaviour
             // TODO: Replace nodePrefab with actual ship node
             shipNode.AddNode(nodePrefab, ghost.transform.position);
 
+            _grid.ClearHighlight(ghostMaterial.color);
             currentSquare = null;
         }
     }

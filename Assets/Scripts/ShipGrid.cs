@@ -26,7 +26,7 @@ public class ShipGrid : MonoBehaviour
         var shipCell = Get(x, y);
         if (shipCell != null)
         {
-            DestroyImmediate(shipCell);
+            Destroy(shipCell.gameObject);
         }
         Cells[(x, y)] = value;
     }
