@@ -98,13 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc97fe7461c0854d81f84464f445de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToDestroy: 100
+  distanceToDestroy: 150
+  distanceToDestroyBehind: 80
   maxRotation: 100
-  MinRotation: 0
+  minRotation: 0
   maxVelocity: 300
   minVelocity: 100
-  accuracyPenalty: 50
-  DeadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
+  accuracyPenalty: 100
+  deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
   prefab: {fileID: 0}
 --- !u!54 &6920122445938181514
 Rigidbody:

@@ -6,22 +6,21 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
-    internal float timeAlive;
+    public float maxDistance;
 
     private Rigidbody _rigidbody;
+    private GameObject _player;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        timeAlive = 0;
-
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
+
     void FixedUpdate()
     {
-        timeAlive += Time.deltaTime;
 
-        // Just destroy after a while
-        if (timeAlive > 5)
+        if(Vector3.Distance(_player.transform.position, transform.position) > maxDistance)
         {
             Destroy(gameObject);
         }

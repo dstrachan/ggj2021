@@ -7,9 +7,10 @@ using Random = UnityEngine.Random;
 public class Asteroid : MonoBehaviour
 {
     public float distanceToDestroy;
+    public float distanceToDestroyBehind;
 
     public float maxRotation;
-    public float MinRotation;
+    public float minRotation;
 
     public float maxVelocity;
     public float minVelocity;
@@ -18,7 +19,8 @@ public class Asteroid : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GameObject _player;
-    public ParticleSystem DeadEffect;
+
+    public ParticleSystem deadEffect;
 
     public GameObject prefab;
 
@@ -27,19 +29,32 @@ public class Asteroid : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
         _player = GameObject.FindGameObjectWithTag("Player");
+        var playerRb = _player.GetComponent<Rigidbody>();
 
-        Vector3 dir = (gameObject.transform.position - _player.transform.position).normalized;
+
+        var target = playerRb.velocity * 5;
+
+        Vector3 dir = (gameObject.transform.position - (_player.transform.position + target)).normalized;
 
         // Add some random direction
         dir = Quaternion.AngleAxis(Random.Range(-accuracyPenalty, accuracyPenalty), Vector3.up) * dir;      
 
         _rigidbody.AddForce(dir * -Random.Range(minVelocity, maxVelocity));
-        _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, MinRotation), 0, Random.Range(maxRotation, MinRotation)));
+        _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, minRotation), 0, Random.Range(maxRotation, minRotation)));
     }
 
     void Update()
     {
-        if (Vector3.Distance(_player.transform.position, transform.position) > distanceToDestroy)
+        var lookAtPlayer = _player.transform.position - transform.position;
+
+        var dot = Vector3.Dot(_player.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
+
+        var destroy = distanceToDestroy;
+        if(dot > 0)
+        {
+            destroy = distanceToDestroyBehind;
+        }
+        if (Vector3.Distance(_player.transform.position, transform.position) > destroy)
         {
             Destroy(gameObject);
         }
@@ -65,7 +80,7 @@ public class Asteroid : MonoBehaviour
 
         }
 
-        var deadEffect = Instantiate(DeadEffect, transform.position, Quaternion.identity);
+        var deadEffect = Instantiate(this.deadEffect, transform.position, Quaternion.identity);
         deadEffect.GetComponent<AutoDelete>().Started = true;
         Destroy(gameObject);
 
