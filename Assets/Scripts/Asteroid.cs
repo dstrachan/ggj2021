@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    public float distanceToDestroy;
+
     public float maxRotation;
     public float minRotation;
 
@@ -13,14 +15,15 @@ public class Asteroid : MonoBehaviour
     public float accuracyPenalty;
 
     private Rigidbody _rigidbody;
-    // Start is called before the first frame update
+    private GameObject _player;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
 
-        var player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
 
-        Vector3 dir = (gameObject.transform.position - player.transform.position).normalized;
+        Vector3 dir = (gameObject.transform.position - _player.transform.position).normalized;
 
         // Add some random direction
         dir = Quaternion.AngleAxis(Random.Range(-accuracyPenalty, accuracyPenalty), Vector3.up) * dir;      
@@ -29,9 +32,11 @@ public class Asteroid : MonoBehaviour
         _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, minRotation), 0, Random.Range(maxRotation, minRotation)));
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        if (Vector3.Distance(_player.transform.position, transform.position) > distanceToDestroy)
+        {
+            Destroy(gameObject);
+        }
     }
 }
