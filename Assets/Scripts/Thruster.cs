@@ -5,24 +5,22 @@ using UnityEngine;
 public enum ThrustDirection
 { 
     Forward,
+    Back,
     Left,
-    Right
+    Right,
 }
 public class Thruster : MonoBehaviour
 {
     public float thrustForce;
     public ThrustDirection thrustDirection;
 
-    internal Light lightEffect;
+    internal ParticleSystem thrustEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-        lightEffect = GetComponentInChildren<Light>();
-        if(lightEffect != null)
-        {
-            lightEffect.enabled = false;
-        }
+        thrustEffect = GetComponentInChildren<ParticleSystem>();
+        thrustEffect.Stop();
     }
 
     // Update is called once per frame

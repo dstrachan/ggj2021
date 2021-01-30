@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -81,11 +79,6 @@ public class TestMove : MonoBehaviour
             _currentSquare = null;
 
             NextPrefab();
-        }
-        
-        if (Input.GetMouseButtonDown(1))
-        {
-            _grid.Export();
         }
     }
 
