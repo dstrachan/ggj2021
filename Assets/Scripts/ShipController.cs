@@ -89,7 +89,11 @@ public class ShipController : MonoBehaviour
         foreach (var thruster in thrusters)
         {
             _rigidbody.AddForceAtPosition(thruster.thrustForce * (thruster.transform.forward) * Time.deltaTime, thruster.transform.position);
-            thruster.lightEffect.enabled = true;
+
+            if (thruster.lightEffect != null)
+            {
+                thruster.lightEffect.enabled = true;
+            }
         }
     }
 }
