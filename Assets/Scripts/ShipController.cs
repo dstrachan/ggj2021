@@ -12,6 +12,7 @@ public class ShipController : MonoBehaviour
     private Thruster[] _leftThrusters;
     private Thruster[] _rearThrusters;
     private Thruster[] _rightThrusters;
+    private Thruster[] _forwardThrusters;
 
     private GameObject _player;
 
@@ -31,7 +32,7 @@ public class ShipController : MonoBehaviour
         _rightThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Right).ToArray();
         _leftThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Left).ToArray();
         _rearThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Forward).ToArray();
-
+        _forwardThrusters = _allThrusters.Where(w => w.thrustDirection == ThrustDirection.Back).ToArray();
     }
 
     //void OnDrawGizmos()
@@ -77,6 +78,11 @@ public class ShipController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             FireThruster(_leftThrusters);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            FireThruster(_forwardThrusters);
         }
 
         if (Input.GetKey(KeyCode.D))

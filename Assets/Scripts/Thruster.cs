@@ -5,8 +5,9 @@ using UnityEngine;
 public enum ThrustDirection
 { 
     Forward,
+    Back,
     Left,
-    Right
+    Right,
 }
 public class Thruster : MonoBehaviour
 {

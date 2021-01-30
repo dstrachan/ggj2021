@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2ae90b0219fe04bb405b08f8442005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 23449606}
+  target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   smoothTime: 0.25
 --- !u!1001 &965710537
@@ -562,6 +562,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff15707240c65b74bb6d5aba0ec04fe7, type: 3}
+--- !u!1 &2057159071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057159073}
+  - component: {fileID: 2057159072}
+  m_Layer: 0
+  m_Name: ShipLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2057159072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057159071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385c14fa17395204b859177d1d2c3de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shipPrefab: {fileID: 3299420318512661945, guid: b8380a77a4e187d4db16759485592130, type: 3}
+  _hullPrefab: {fileID: 39174816975284584, guid: 052f7819bd38f494bb9f3fab5906a9f1, type: 3}
+  _gunPrefab: {fileID: 9204143974621766841, guid: 5e93c6b48c043da4abf0b2ec0fdcead0, type: 3}
+  _thrusterPrefab: {fileID: 6421152851246742724, guid: 0c63dc1a0df5b89448d0021871528085, type: 3}
+--- !u!4 &2057159073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057159071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.04, y: 34.9, z: -6.6000004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2106897836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -703,9 +750,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2867591594807828348, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
+      propertyPath: thrustDirection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3299420318512661945, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
       propertyPath: m_Name
       value: SpaceShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299420318512661945, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3299420318512661948, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
       propertyPath: m_RootOrder
@@ -755,6 +810,10 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5403587178865425190, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
+      propertyPath: thrustDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6319514792418346982, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
       propertyPath: damage
       value: 40
@@ -764,6 +823,10 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6711668829073104539, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
+      propertyPath: thrustDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965531211871289711, guid: cc3520f65e0b87242aeadc713d7b57e8, type: 3}
       propertyPath: thrustDirection
       value: 0
       objectReference: {fileID: 0}

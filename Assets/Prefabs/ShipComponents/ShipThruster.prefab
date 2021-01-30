@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustForce: 50
-  thrustDirection: 2
+  thrustDirection: 3
 --- !u!54 &-3969029849398351775
 Rigidbody:
   m_ObjectHideFlags: 0
