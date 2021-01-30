@@ -39,4 +39,9 @@ public class Asteroid : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void AsteroidDestroyed()
+    {
+        Destroy(gameObject);
+    }
 }
