@@ -39,6 +39,7 @@ public class launchButton : MonoBehaviour
 
     void OnMouseDown() {
         clicking = true;
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Shop");
     }
 

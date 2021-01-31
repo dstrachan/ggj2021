@@ -9,6 +9,8 @@ public class GameTimer : MonoBehaviour
 {
     public Text TimerText;
     public Text GameOver;
+    public Image Health;
+    public GameObject LaunchButton;
 
     public float TimeLeftSeconds;
     private ShipController _player;
@@ -28,6 +30,8 @@ public class GameTimer : MonoBehaviour
     {
         if(!_once && _player.dead)
         {
+            Health.gameObject.SetActive(false);
+            LaunchButton.gameObject.SetActive(true);
             GameOver.gameObject.SetActive(true);
             TimerText.gameObject.SetActive(false);
         }

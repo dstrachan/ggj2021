@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ShipController : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class ShipController : MonoBehaviour
     private GameObject _player;
 
     public float maxSpeed;
+
     public float shipHealth;
 
-    public TextMesh healthDisplay;
-    private TextMesh _healthInstance;
+    private float _shipHealthTotal;
+
+    private Image healthDisplay;
 
     public bool dead;
 
@@ -31,10 +34,11 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _healthInstance = Instantiate(healthDisplay);
-        _healthInstance.transform.position = transform.position;
+        shipHealth = GetComponentsInChildren<ShipCell>().Length;
 
+        _shipHealthTotal = shipHealth;
         _player = GameObject.FindGameObjectWithTag("Player");
+        healthDisplay = GameObject.FindGameObjectWithTag("ShipHealth").GetComponent<Image>();
 
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = SceneManager.GetActiveScene().name == "Shop";
@@ -77,8 +81,7 @@ public class ShipController : MonoBehaviour
 
     private void Update()
     {
-        _healthInstance.text = string.Format("{0:F1}", shipHealth);
-        _healthInstance.transform.position = transform.position;
+        healthDisplay.fillAmount = (shipHealth/ _shipHealthTotal);
 
     }
 
@@ -101,8 +104,6 @@ public class ShipController : MonoBehaviour
         deadEffect.transform.localScale = new Vector3(1, 1, 1);
 
         deadEffect.GetComponent<AutoDelete>().Started = true;
-
-        _healthInstance.gameObject.SetActive(false);
 
         dead = true;
         _rigidbody.velocity = new Vector3(0, 0, 0);
