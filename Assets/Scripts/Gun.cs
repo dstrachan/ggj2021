@@ -41,7 +41,9 @@ public class Gun : MonoBehaviour
             projectile.damage = damage;
             projectile.range = range;
 
-            _nextPossibleShootTime = Time.time + secondsBetweenShots;           
+            _nextPossibleShootTime = Time.time + secondsBetweenShots;
+
+            GetComponent<AudioSource>()?.Play();
         }
     }
 
