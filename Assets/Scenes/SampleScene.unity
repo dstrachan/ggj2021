@@ -5643,6 +5643,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 78506061919238135, guid: ae3b95d8b82a297478eba048a94a292b, type: 3}
   m_PrefabInstance: {fileID: 932830072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1732380307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 746815186091470157, guid: ae3b95d8b82a297478eba048a94a292b, type: 3}
+  m_PrefabInstance: {fileID: 932830072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1968214909
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,7 +5983,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerText: {fileID: 1968214911}
   GameOver: {fileID: 959703601}
-  LaunchButton: {fileID: 0}
+  Health: {fileID: 173202720}
+  LaunchButton: {fileID: 1732380307}
   TimeLeftSeconds: 30
   TimerEnd:
     m_PersistentCalls:
