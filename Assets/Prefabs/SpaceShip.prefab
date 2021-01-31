@@ -65,7 +65,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &3299420318512661949
 MonoBehaviour:
@@ -80,6 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 10
+  shipHealth: 10
+  healthDisplay: {fileID: 3039787777815076769, guid: 4b4e7a8dfb5b3ee419ec3b396b6d877b, type: 3}
+  dead: 0
+  deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
 --- !u!1001 &1510001370643977725
 PrefabInstance:
   m_ObjectHideFlags: 0
