@@ -86,7 +86,7 @@ public class ShipController : MonoBehaviour
 
         deadEffect.GetComponent<AutoDelete>().Started = true;
 
-        healthDisplay.gameObject.SetActive(false);
+        _healthInstance.gameObject.SetActive(false);
 
         dead = true;
         _rigidbody.velocity = new Vector3(0, 0, 0);
