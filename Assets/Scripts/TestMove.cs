@@ -38,6 +38,16 @@ public class TestMove : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            _child.SetActive(false);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            _child.SetActive(true);
+        }
+
         var scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
