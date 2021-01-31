@@ -13,14 +13,20 @@ public class ShipData
 }
 
 [Serializable]
-public class ShipDataWrapper
+public class GameData
 {
-    public List<ShipData> data = new List<ShipData>();
+    public List<ShipData> shipData = new List<ShipData>();
+    public float score;
+    public float totalScore;
 }
 
 public class ShipLoader : MonoBehaviour
 {
-    public static bool clearData = false;
+    public static bool clearData = true;
+
+    public float shopTime = 30;
+    public float flightTime = 60;
+    public float scoreMultiplier = 15;
     public string shipName = "ship";
 
     [SerializeField] private GameObject _shipPrefab;
@@ -29,9 +35,10 @@ public class ShipLoader : MonoBehaviour
     [SerializeField] private GameObject _thrusterPrefab;
 
     private ShipGrid _shipGrid;
+    private GameData _gameData;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void OnBeforeSceneLoadRuntimeMethod()
+    static void OnBeforeSceneLoad()
     {
         if (clearData)
         {
@@ -42,6 +49,7 @@ public class ShipLoader : MonoBehaviour
     private void Awake()
     {
         ImportFromPlayerPrefs(shipName);
+        Debug.Log($"Score: {_gameData.score}; Total Score: {_gameData.totalScore}");
     }
 
     private void Start()
@@ -59,12 +67,18 @@ public class ShipLoader : MonoBehaviour
     {
         var obj = Instantiate(_shipPrefab);
 
-        var shipData = JsonUtility.FromJson<ShipDataWrapper>(json);
-        if (shipData == null)
+        var gameData = JsonUtility.FromJson<GameData>(json);
+        if (gameData == null)
+        {
+            _gameData = new GameData();
+            SetTimer(_gameData);
             return obj;
+        }
+
+        SetTimer(gameData);
 
         var grid = obj.GetComponentInChildren<ShipGrid>();
-        foreach (var cell in shipData.data)
+        foreach (var cell in gameData.shipData)
         {
             switch (cell.cellType)
             {
@@ -87,6 +101,7 @@ public class ShipLoader : MonoBehaviour
                         ThrustDirection.Right => Quaternion.AngleAxis(90, Vector3.up),
                         ThrustDirection.Back => Quaternion.AngleAxis(180, Vector3.up),
                         ThrustDirection.Left => Quaternion.AngleAxis(270, Vector3.up),
+                        _ => Quaternion.identity,
                     };
                     break;
             }
@@ -98,7 +113,10 @@ public class ShipLoader : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
+
         }
+
+        _gameData = gameData;
 
         return obj;
     }
@@ -107,7 +125,12 @@ public class ShipLoader : MonoBehaviour
 
     public string ExportToJson()
     {
-        var shipData = new ShipDataWrapper();
+        var gameData = new GameData();
+
+        var score = FindObjectOfType<ShipController>().score;
+        gameData.score = score;
+        gameData.totalScore = _gameData.totalScore + score;
+
         foreach (var cell in _shipGrid.cells.Values)
         {
             switch (cell.cellType)
@@ -115,7 +138,7 @@ public class ShipLoader : MonoBehaviour
                 case CellType.Hull:
                 case CellType.Gun:
                 case CellType.Thruster:
-                    shipData.data.Add(new ShipData
+                    gameData.shipData.Add(new ShipData
                     {
                         cellType = cell.cellType,
                         localPosition = cell.transform.localPosition,
@@ -125,7 +148,19 @@ public class ShipLoader : MonoBehaviour
                     break;
             }
         }
-        return JsonUtility.ToJson(shipData);
+
+        return JsonUtility.ToJson(gameData);
     }
 
+    private void SetTimer(GameData gameData)
+    {
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            FindObjectOfType<GameTimer>().TimeLeftSeconds = shopTime + ((gameData.score + 1) * scoreMultiplier);
+        }
+        else
+        {
+            FindObjectOfType<GameTimer>().TimeLeftSeconds = flightTime + ((gameData.score + 1) * scoreMultiplier);
+        }
+    }
 }
