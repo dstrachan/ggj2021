@@ -5939,7 +5939,7 @@ MonoBehaviour:
   GameOver: {fileID: 959703601}
   Health: {fileID: 173202720}
   LaunchButton: {fileID: 1732380307}
-  TimeLeftSeconds: 10
+  TimeLeftSeconds: 45
   TimerEnd:
     m_PersistentCalls:
       m_Calls:
