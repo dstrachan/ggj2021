@@ -71,6 +71,14 @@ public class TestMove : MonoBehaviour
                     return;
 
                 var shipCell = ghost.GetComponent<ShipCell>();
+                shipCell.thrustDirection = shipCell.transform.localRotation.eulerAngles.y switch
+                {
+                    0 => ThrustDirection.Forward,
+                    90 => ThrustDirection.Right,
+                    180 => ThrustDirection.Back,
+                    270 => ThrustDirection.Left,
+                    _ => ThrustDirection.Forward,
+                };
                 _grid.Add(shipCell.x, shipCell.y, _child);
                 _grid.UpdateGhosts();
             }

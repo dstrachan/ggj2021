@@ -37,6 +37,7 @@ public class ShipCell : MonoBehaviour
     internal int x;
     internal int y;
     public CellType cellType;
+    public ThrustDirection thrustDirection; // Only used for cellType == CellType.Thruster
 
     private ShipGrid _grid;
 
