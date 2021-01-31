@@ -19,7 +19,7 @@ public class Target : MonoBehaviour
 
     void Update()
     {
-        if (hitPoints <= 0)
+        if (hitPoints <= 0) 
         {
             alive = false;
 

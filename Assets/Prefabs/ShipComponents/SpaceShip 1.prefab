@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 12
-  shipHealth: 5000
-  healthDisplay: {fileID: 3039787777815076769, guid: 4b4e7a8dfb5b3ee419ec3b396b6d877b, type: 3}
+  shipHealth: 100
+  healthDisplay: {fileID: 0}
   dead: 0
   deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
 --- !u!1001 &5456865633306512267

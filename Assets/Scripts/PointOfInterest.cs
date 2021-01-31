@@ -18,7 +18,6 @@ public class PointOfInterest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         _arrowInstance = Instantiate(arrow);
         _textInstance = Instantiate(text);
