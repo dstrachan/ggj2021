@@ -17,10 +17,21 @@ public class ShipController : MonoBehaviour
     private GameObject _player;
 
     public float maxSpeed;
+    public float shipHealth;
+
+    public TextMesh healthDisplay;
+    private TextMesh _healthInstance;
+
+    public bool dead;
+
+    public ParticleSystem deadEffect;
 
     // Start is called before the first frame update
     void Start()
     {
+        _healthInstance = Instantiate(healthDisplay);
+        _healthInstance.transform.position = transform.position;
+
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _rigidbody = GetComponent<Rigidbody>();
@@ -48,6 +59,40 @@ public class ShipController : MonoBehaviour
     //    }
     //}
 
+    private void Update()
+    {
+        _healthInstance.text = string.Format("{0:F1}", shipHealth);
+        _healthInstance.transform.position = transform.position;
+
+    }
+
+    public void ShipDead()
+    {
+        var children = GameObject.FindGameObjectsWithTag("ShipComponent");
+
+        foreach (var child in children)
+        {
+            child.transform.parent = null;
+            var childrb = child.AddComponent<Rigidbody>();
+
+            var dir = Quaternion.AngleAxis(Random.Range(-100, 100), Vector3.up) * Vector3.forward;
+
+            childrb.AddForce(dir * -Random.Range(100, 400));
+            childrb.AddTorque(new Vector3(Random.Range(0, 100), 0, Random.Range(0, 100)));
+        }
+
+        var deadEffect = Instantiate(this.deadEffect, transform.position, Quaternion.identity);
+        deadEffect.transform.localScale = new Vector3(1,1,1);
+
+        deadEffect.GetComponent<AutoDelete>().Started = true;
+
+        healthDisplay.gameObject.SetActive(false);
+
+        dead = true;
+        _rigidbody.velocity = new Vector3(0, 0, 0);
+        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -70,24 +115,27 @@ public class ShipController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (!dead)
         {
-            FireThruster(_rearThrusters);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                FireThruster(_rearThrusters);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            FireThruster(_leftThrusters);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                FireThruster(_leftThrusters);
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            FireThruster(_forwardThrusters);
-        }
+            if (Input.GetKey(KeyCode.S))
+            {
+                FireThruster(_forwardThrusters);
+            }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            FireThruster(_rightThrusters);
+            if (Input.GetKey(KeyCode.D))
+            {
+                FireThruster(_rightThrusters);
+            }
         }
 
     }

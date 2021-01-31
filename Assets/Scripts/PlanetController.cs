@@ -6,7 +6,7 @@ public class PlanetController : MonoBehaviour
 {
     public int maxSpawnRadius;
     public int minSpawnRadius;
-
+    public int numberOfPlanets;
 
     public GameObject prefab;
 
@@ -17,10 +17,10 @@ public class PlanetController : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
 
-        SpawnPlanet();
-        SpawnPlanet();
-        SpawnPlanet();
-        SpawnPlanet();
+        for (int i = 0; i < numberOfPlanets; i++)
+        {
+            SpawnPlanet();
+        }  
     }
 
     GameObject SpawnPlanet()
