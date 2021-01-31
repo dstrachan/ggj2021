@@ -18,14 +18,14 @@ public class SceneLoader : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
-        {
-            _shipLoader.Save();
+        {       
             LoadNextScene();
         }
     }
 
     public void LoadNextScene()
     {
+        _shipLoader.Save();
         var nextScene = SceneManager.GetActiveScene().name == _scene1 ? _scene2 : _scene1;
         StartCoroutine(LoadYourAsyncScene(nextScene));
     }
