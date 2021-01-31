@@ -5068,6 +5068,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetController
       objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934447, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: maxSpawnRadius
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934447, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: minSpawnRadius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934447, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: numberOfPlanets
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
 --- !u!1 &440260684

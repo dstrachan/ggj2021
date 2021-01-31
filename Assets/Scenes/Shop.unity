@@ -1288,7 +1288,7 @@ MonoBehaviour:
   ClickEvent:
     m_PersistentCalls:
       m_Calls: []
-  spawnTime: 2
+  spawnTime: 1
 --- !u!4 &1940954622
 Transform:
   m_ObjectHideFlags: 0
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e72a9139497a4f4da9d2f433662b508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
 --- !u!65 &2073784177
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -17,10 +17,10 @@ public class SceneLoader : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {       
-            LoadNextScene();
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{       
+        //    LoadNextScene();
+        //}
     }
 
     public void LoadNextScene()
