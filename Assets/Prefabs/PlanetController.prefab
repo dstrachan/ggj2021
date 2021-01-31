@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ba73c80449f1a40b8a07284ecaf186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnRadius: 1000
+  maxSpawnRadius: 900
   minSpawnRadius: 300
-  prefab: {fileID: 808367475938756780, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
+  numberOfPlanets: 3
+  prefab: {fileID: 4725255285452266682, guid: 230bf42d94976c64b8ed216b2791ac81, type: 3}

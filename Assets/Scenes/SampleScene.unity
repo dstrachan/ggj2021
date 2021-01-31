@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &135762931
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -290,7 +290,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 90
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -343,7 +343,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -459,7 +459,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -921,7 +921,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 300
+      value: 1000
       mode: 0
       spread: 0
       speed:
@@ -1040,7 +1040,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 1000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4927,6 +4927,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1001 &277596043
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.438675
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.402031
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.196077
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934440, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271349659363934446, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
+      propertyPath: m_Name
+      value: PlanetController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
 --- !u!1 &440260684
 GameObject:
   m_ObjectHideFlags: 0
@@ -5476,6 +5533,18 @@ PrefabInstance:
     - target: {fileID: 2668171066058109682, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
       propertyPath: m_AngularDrag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081972816410370556, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081972816410370556, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081972816410370556, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -44.7
       objectReference: {fileID: 0}
     - target: {fileID: 7478292036028863169, guid: 163e1460a90c4b14ca3878fc7159ba4e, type: 3}
       propertyPath: Speed
