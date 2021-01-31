@@ -22,8 +22,8 @@ public class TestMove : MonoBehaviour
     private void Awake()
     {
         _grid = FindObjectOfType<ShipGrid>();
-        NextPrefab();
-        SpawnChild();
+        //NextPrefab();
+        //SpawnChild();
     }
 
     private void Start()
@@ -47,7 +47,9 @@ public class TestMove : MonoBehaviour
 
     public void SetChild(CellType cellType)
     {
-        if(cellType == CellType.Hull)
+        Destroy(_child);
+
+        if (cellType == CellType.Hull)
         {
             _currentPrefab = _shipPrefabs[0];
         }
@@ -57,7 +59,7 @@ public class TestMove : MonoBehaviour
         }
         if (cellType == CellType.Thruster)
         {
-            _currentPrefab = _shipPrefabs[0];
+            _currentPrefab = _shipPrefabs[2];
         }
 
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
@@ -107,10 +109,11 @@ public class TestMove : MonoBehaviour
             if (ghost == _bin)
             {
                 Destroy(_child);
-                NextPrefab();
+                //NextPrefab();
             }
-            else
+            else if (_child != null)
             {
+                
                 if (!_child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
                     return;
 
@@ -123,12 +126,12 @@ public class TestMove : MonoBehaviour
                 }
                 _grid.Add(ghostShip.x, ghostShip.y, _child);
                 _grid.UpdateGhosts();
+
+                _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
+                _currentSquare = null;
+                _child = null;
             }
-
-            _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
-            _currentSquare = null;
-
-            SpawnChild();
+            //SpawnChild();
         }
     }
 
@@ -165,7 +168,7 @@ public class TestMove : MonoBehaviour
             {
                 return;
             }
-            else if (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+            else if (_child != null && (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>())))
             {
                 _currentSquare.GetComponent<HighlightCell>()?.HighlightGood();
             }

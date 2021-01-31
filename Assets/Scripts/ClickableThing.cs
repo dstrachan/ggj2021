@@ -31,7 +31,9 @@ public class ClickableThing : MonoBehaviour
                     var shipCell = hit.transform.gameObject.GetComponent<ShipCell>();
                     Debug.Log("in if " + shipCell.cellType);
 
-                    testMove.SetChild(shipCell.cellType);                   
+                    testMove.SetChild(shipCell.cellType);
+
+                    Destroy(gameObject);
                 }
             }
         }
