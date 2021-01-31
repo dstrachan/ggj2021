@@ -6,6 +6,7 @@ public class TestMove : MonoBehaviour
     private readonly RaycastHit[] _results = new RaycastHit[2];
     private ShipGrid _grid;
 
+    private int _index;
     private GameObject _currentPrefab;
     private GameObject _child;
     private Plane _plane;
@@ -22,6 +23,7 @@ public class TestMove : MonoBehaviour
     {
         _grid = FindObjectOfType<ShipGrid>();
         NextPrefab();
+        SpawnChild();
     }
 
     private void Start()
@@ -32,8 +34,12 @@ public class TestMove : MonoBehaviour
 
     private void NextPrefab()
     {
-        var index = Random.Range(0, _shipPrefabs.Length);
-        _currentPrefab = _shipPrefabs[index];
+        _currentPrefab = _shipPrefabs[_index];
+        _index = (_index + 1) % _shipPrefabs.Length;
+    }
+
+    private void SpawnChild()
+    {
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
     }
 
@@ -81,6 +87,7 @@ public class TestMove : MonoBehaviour
             if (ghost == _bin)
             {
                 Destroy(_child);
+                NextPrefab();
             }
             else
             {
@@ -101,7 +108,7 @@ public class TestMove : MonoBehaviour
             _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
             _currentSquare = null;
 
-            NextPrefab();
+            SpawnChild();
         }
     }
 
