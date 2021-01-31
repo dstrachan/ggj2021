@@ -5,23 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string _scene;
+    [SerializeField] private string _scene1 = "Shop";
+    [SerializeField] private string _scene2 = "SampleScene";
 
-    private GameObject _ship;
+    private ShipLoader _shipLoader;
+
+    private void Start()
+    {
+        _shipLoader = FindObjectOfType<ShipLoader>();
+    }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            var shipGrid = FindObjectOfType<ShipGrid>();
-            shipGrid.ExportToPlayerPrefs("ship");
-            StartCoroutine(LoadYourAsyncScene());
+            _shipLoader.Save();
+            LoadNextScene();
         }
     }
 
-    private IEnumerator LoadYourAsyncScene()
+    public void LoadNextScene()
     {
-        var asyncLoad = SceneManager.LoadSceneAsync(_scene, LoadSceneMode.Single);
+        var nextScene = SceneManager.GetActiveScene().name == _scene1 ? _scene2 : _scene1;
+        StartCoroutine(LoadYourAsyncScene(nextScene));
+    }
+
+    private IEnumerator LoadYourAsyncScene(string scene)
+    {
+        var asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
         while (!asyncLoad.isDone)
         {
             yield return null;
