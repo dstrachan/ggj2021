@@ -60,6 +60,7 @@ crashlytics-build.properties
 
 # Blender Backup Files
 *.blend1
+*.blend1.*
 
 # Dont save individual editor settings
 EditorUserSettings.asset
