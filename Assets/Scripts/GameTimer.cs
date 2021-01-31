@@ -28,6 +28,7 @@ public class GameTimer : MonoBehaviour
     {
         if(!_once && _player.dead)
         {
+            GameOver.gameObject.SetActive(true);
             TimerText.gameObject.SetActive(false);
         }
 
