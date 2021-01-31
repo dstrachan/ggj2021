@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     public float maxSpeed;
 
     public float shipHealth;
+    public float healthMultipler;
 
     private float _shipHealthTotal;
 
@@ -34,7 +35,7 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shipHealth = GetComponentsInChildren<ShipCell>().Length;
+        shipHealth = GetComponentsInChildren<ShipCell>().Length * healthMultipler;
 
         _shipHealthTotal = shipHealth;
         _player = GameObject.FindGameObjectWithTag("Player");

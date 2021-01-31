@@ -63,7 +63,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 12
   shipHealth: 100
+  healthMultipler: 2
   dead: 0
+  score: 0
   deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
 --- !u!1001 &5456865633306512267
 PrefabInstance:
