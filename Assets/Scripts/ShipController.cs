@@ -27,6 +27,8 @@ public class ShipController : MonoBehaviour
 
     public bool dead;
 
+    public float score;
+
     public ParticleSystem deadEffect;
 
     // Start is called before the first frame update
@@ -67,6 +69,20 @@ public class ShipController : MonoBehaviour
     //    }
     //}
 
+
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        HitTarget(collision);
+    }
+
+    private void HitTarget(Collider collider)
+    {
+        score += 1;
+        Destroy(collider.gameObject.GetComponentInParent<PointOfInterest>().gameObject);
+
+    }
+
     private void Update()
     {
         if (healthDisplay != null)
@@ -91,7 +107,7 @@ public class ShipController : MonoBehaviour
         }
 
         var deadEffect = Instantiate(this.deadEffect, transform.position, Quaternion.identity);
-        deadEffect.transform.localScale = new Vector3(1,1,1);
+        deadEffect.transform.localScale = new Vector3(1, 1, 1);
 
         deadEffect.GetComponent<AutoDelete>().Started = true;
 

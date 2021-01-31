@@ -20,29 +20,29 @@ public class PointOfInterest : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         _arrowInstance = Instantiate(arrow);
+        _arrowInstance.transform.parent = gameObject.transform;
         _textInstance = Instantiate(text);
+        _textInstance.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_player.dead && !_once)
+        if (_player.dead && !_once)
         {
             _arrowInstance.SetActive(false);
             _textInstance.gameObject.SetActive(false);
             _once = true;
         }
 
-        Vector3 dir = (gameObject.transform.position - _player.transform.position).normalized * indicatorDistance;        
+        Vector3 dir = (gameObject.transform.position - _player.transform.position).normalized * indicatorDistance;
         _arrowInstance.transform.position = new Vector3(_player.transform.position.x + dir.x, 0, _player.transform.position.z + dir.z);
 
-        Vector3 textDir = (gameObject.transform.position - _player.transform.position).normalized * (indicatorDistance-1.5f);
-
+        Vector3 textDir = (gameObject.transform.position - _player.transform.position).normalized * (indicatorDistance - 1.5f);
         _textInstance.transform.position = new Vector3(_player.transform.position.x + textDir.x, 0, _player.transform.position.z + textDir.z);
 
         _textInstance.text = $"{Math.Round(Vector3.Distance(gameObject.transform.position, _player.transform.position))}km";
 
         _arrowInstance.transform.LookAt(gameObject.transform);
-
     }
 }
