@@ -69,18 +69,18 @@ public class TestMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            _child.SetActive(false);
+            _child?.SetActive(false);
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            _child.SetActive(true);
+            _child?.SetActive(true);
         }
 
         var scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
-            if (_child.activeInHierarchy && _child.GetComponent<ShipCell>().cellType != CellType.Hull)
+            if (_child != null && (_child.activeInHierarchy && _child.GetComponent<ShipCell>().cellType != CellType.Hull))
             {
                 _child.transform.Rotate(Vector3.up, 90 * scroll);
             }
