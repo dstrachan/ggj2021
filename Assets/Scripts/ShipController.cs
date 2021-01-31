@@ -24,6 +24,8 @@ public class ShipController : MonoBehaviour
 
     public bool dead;
 
+    public float score;
+
     public ParticleSystem deadEffect;
 
     // Start is called before the first frame update
