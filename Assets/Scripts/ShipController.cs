@@ -104,8 +104,11 @@ public class ShipController : MonoBehaviour
 
             var dir = Quaternion.AngleAxis(Random.Range(-100, 100), Vector3.up) * Vector3.forward;
 
-            childrb.AddForce(dir * -Random.Range(100, 400));
-            childrb.AddTorque(new Vector3(Random.Range(0, 100), 0, Random.Range(0, 100)));
+            if (childrb != null)
+            {
+                childrb.AddForce(dir * -Random.Range(100, 400));
+                childrb.AddTorque(new Vector3(Random.Range(0, 100), 0, Random.Range(0, 100)));
+            }
         }
 
         var deadEffect = Instantiate(this.deadEffect, transform.position, Quaternion.identity);
