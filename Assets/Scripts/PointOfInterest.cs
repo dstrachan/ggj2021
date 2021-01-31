@@ -21,7 +21,9 @@ public class PointOfInterest : MonoBehaviour
 
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         _arrowInstance = Instantiate(arrow);
+        _arrowInstance.transform.parent = gameObject.transform;
         _textInstance = Instantiate(text);
+        _textInstance.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame
