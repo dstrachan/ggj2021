@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: dad7fcd19be5acb4ba73c028791702dd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Edge of the Galaxy
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c33969fbc080679459d799a0c6e41cbe, type: 3}
+  - {fileID: 12800000, guid: a69de3b65a47c2843ba257ff29bdbe7e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
