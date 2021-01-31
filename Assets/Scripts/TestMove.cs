@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TestMove : MonoBehaviour
 {
@@ -39,6 +38,16 @@ public class TestMove : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            _child.SetActive(false);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            _child.SetActive(true);
+        }
+
         var scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
@@ -72,6 +81,14 @@ public class TestMove : MonoBehaviour
                     return;
 
                 var shipCell = ghost.GetComponent<ShipCell>();
+                shipCell.thrustDirection = shipCell.transform.localRotation.eulerAngles.y switch
+                {
+                    0 => ThrustDirection.Forward,
+                    90 => ThrustDirection.Right,
+                    180 => ThrustDirection.Back,
+                    270 => ThrustDirection.Left,
+                    _ => ThrustDirection.Forward,
+                };
                 _grid.Add(shipCell.x, shipCell.y, _child);
                 _grid.UpdateGhosts();
             }
