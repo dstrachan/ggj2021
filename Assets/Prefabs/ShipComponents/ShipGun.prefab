@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6455710368519009827}
   m_Layer: 0
   m_Name: ShipGun
-  m_TagString: Untagged
+  m_TagString: ShipComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   secondsBetweenShots: 0.4
   shootPoint: {fileID: 6509000712785226201}
   bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}
+  player: {fileID: 0}
 --- !u!114 &5624383966747387333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 51dade3a88ba3d545b3a5054c3edf7f6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.071
   m_Pitch: 1
   Loop: 0
   Mute: 0

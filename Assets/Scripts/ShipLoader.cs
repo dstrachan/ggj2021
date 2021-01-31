@@ -79,7 +79,15 @@ public class ShipLoader : MonoBehaviour
                 case CellType.Thruster:
                     var thruster = Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
                     grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, thruster);
+                    thruster.GetComponent<ShipCell>().thrustDirection = cell.thrustDirection;
                     thruster.GetComponent<Thruster>().thrustDirection = cell.thrustDirection;
+                    thruster.GetComponentInChildren<ThrustDirectionIndicator>().transform.rotation = cell.thrustDirection switch
+                    {
+                        ThrustDirection.Forward => Quaternion.AngleAxis(0, Vector3.up),
+                        ThrustDirection.Right => Quaternion.AngleAxis(90, Vector3.up),
+                        ThrustDirection.Back => Quaternion.AngleAxis(180, Vector3.up),
+                        ThrustDirection.Left => Quaternion.AngleAxis(270, Vector3.up),
+                    };
                     break;
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class TestMove : MonoBehaviour
 {
     private Collider _currentSquare;
-    private readonly RaycastHit[] _results = new RaycastHit[1];
+    private readonly RaycastHit[] _results = new RaycastHit[2];
     private ShipGrid _grid;
 
     private GameObject _currentPrefab;
@@ -14,6 +14,7 @@ public class TestMove : MonoBehaviour
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private string _ghostTag;
     [SerializeField] private LayerMask _ghostLayer;
+    [SerializeField] private LayerMask _thrustLayer;
     [SerializeField] private string _shopScene;
     [SerializeField] private GameObject _bin;
 
@@ -51,13 +52,19 @@ public class TestMove : MonoBehaviour
         var scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {
-            if (_child.GetComponent<ShipCell>().cellType != CellType.Hull)
+            if (_child.activeInHierarchy && _child.GetComponent<ShipCell>().cellType != CellType.Hull)
             {
                 _child.transform.Rotate(Vector3.up, 90 * scroll);
             }
+            else if (_currentSquare != null)
+            {
+                var thrustDirectionIndicator = _currentSquare.GetComponentInChildren<ThrustDirectionIndicator>();
+                thrustDirectionIndicator.transform.Rotate(Vector3.up, 90 * scroll);
+                _currentSquare.GetComponent<ShipCell>().thrustDirection = GetThrustDirection(thrustDirectionIndicator.transform.rotation);
+            }
         }
 
-        if (_currentSquare == null)
+        if (_currentSquare == null || _currentSquare.gameObject.layer != LayerMask.NameToLayer("Ghost"))
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (_plane.Raycast(ray, out var distance))
@@ -80,51 +87,71 @@ public class TestMove : MonoBehaviour
                 if (!_child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
                     return;
 
-                var shipCell = ghost.GetComponent<ShipCell>();
-                shipCell.thrustDirection = shipCell.transform.localRotation.eulerAngles.y switch
+                var ghostShip = ghost.GetComponent<ShipCell>();
+                var shipCell = _child.GetComponent<ShipCell>();
+                shipCell.thrustDirection = GetThrustDirection(shipCell.transform.rotation);
+                if (shipCell.cellType == CellType.Thruster)
                 {
-                    0 => ThrustDirection.Forward,
-                    90 => ThrustDirection.Right,
-                    180 => ThrustDirection.Back,
-                    270 => ThrustDirection.Left,
-                    _ => ThrustDirection.Forward,
-                };
-                _grid.Add(shipCell.x, shipCell.y, _child);
+                    shipCell.GetComponent<Thruster>().thrustDirection = shipCell.thrustDirection;
+                }
+                _grid.Add(ghostShip.x, ghostShip.y, _child);
                 _grid.UpdateGhosts();
             }
 
-            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
+            _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
             _currentSquare = null;
 
             NextPrefab();
         }
     }
 
+    private ThrustDirection GetThrustDirection(Quaternion rotation) => rotation.eulerAngles.y switch
+    {
+        0 => ThrustDirection.Forward,
+        90 => ThrustDirection.Right,
+        180 => ThrustDirection.Back,
+        270 => ThrustDirection.Left,
+        _ => ThrustDirection.Forward,
+    };
+
     private void FixedUpdate()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var n = Physics.RaycastNonAlloc(ray, _results, 100, _ghostLayer);
+        var n = Physics.RaycastNonAlloc(ray, _results, 100, _ghostLayer | _thrustLayer);
         if (n > 0)
         {
             if (_currentSquare != null)
             {
-                _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
+                _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
             }
 
-            _currentSquare = _results[0].collider;
-            if (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+            var i = 0;
+            if (_results[0].collider.gameObject == _child)
             {
-                _currentSquare.GetComponent<HighlightCell>().HighlightGood();
+                i++; // Skip collision with child
+                if (i >= n)
+                    return;
+            }
+
+            _currentSquare = _results[i].collider;
+            if (_currentSquare.gameObject.layer != LayerMask.NameToLayer("Ghost"))
+            {
+                return;
+            }
+            else if (_currentSquare.gameObject == _bin || _child.GetComponent<ShipCell>().IsCorrectlyRotated(_currentSquare.GetComponent<ShipCell>()))
+            {
+                _currentSquare.GetComponent<HighlightCell>()?.HighlightGood();
             }
             else
             {
-                _currentSquare.GetComponent<HighlightCell>().HighlightBad();
+                _currentSquare.GetComponent<HighlightCell>()?.HighlightBad();
             }
-            transform.position = _currentSquare.transform.position;
+
+            transform.position = _currentSquare.transform.position; // Snap position
         }
         else if (_currentSquare != null)
         {
-            _currentSquare.GetComponent<HighlightCell>().ResetHighlight();
+            _currentSquare.GetComponent<HighlightCell>()?.ResetHighlight();
             _currentSquare = null;
         }
     }

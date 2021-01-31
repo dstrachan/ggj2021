@@ -1170,12 +1170,9 @@ MonoBehaviour:
   _ghostLayer:
     serializedVersion: 2
     m_Bits: 64
-  _thrusterLayer:
+  _thrustLayer:
     serializedVersion: 2
     m_Bits: 512
-  _bothLayer:
-    serializedVersion: 2
-    m_Bits: 576
   _shopScene: Shop
   _bin: {fileID: 679749047}
 --- !u!4 &846955891018196101
