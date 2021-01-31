@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum CellType
@@ -37,7 +35,7 @@ public class ShipCell : MonoBehaviour
     internal int x;
     internal int y;
     public CellType cellType;
-    public ThrustDirection thrustDirection; // Only used for cellType == CellType.Thruster
+    public ThrustDirection thrustDirection;
 
     private ShipGrid _grid;
 

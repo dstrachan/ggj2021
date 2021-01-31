@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ghost
   - Asteroid
+  - ThrustDirection
   layers:
   - Default
   - TransparentFX
