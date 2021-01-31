@@ -1245,7 +1245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859978268}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 3.9, y: 14.1, z: -12.4}
+  m_LocalPosition: {x: 0.94, y: 14.1, z: -12.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   ClickEvent:
     m_PersistentCalls:
       m_Calls: []
-  spawnTime: 5
+  spawnTime: 2
 --- !u!4 &1940954622
 Transform:
   m_ObjectHideFlags: 0
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e72a9139497a4f4da9d2f433662b508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 3
 --- !u!65 &2073784177
 BoxCollider:
   m_ObjectHideFlags: 0

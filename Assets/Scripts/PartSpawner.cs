@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class PartSpawner : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class PartSpawner : MonoBehaviour
         if (_nextPossibleShootTime < Time.time)
         {
             _nextPossibleShootTime = Time.time + spawnTime;
-            var partInstance = Instantiate(Parts[_index = (_index + 1) % Parts.Length], transform.position, Quaternion.identity);
+            var partInstance = Instantiate(Parts[Random.Range(0, Parts.Length)], transform.position, Quaternion.identity);
             var rb = partInstance.AddComponent<Rigidbody>();
             partInstance.AddComponent<ClickableThing>();
             rb.constraints = RigidbodyConstraints.FreezeRotationZ;
