@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +9,7 @@ public class ShipData
     public Vector3 localPosition;
     public Quaternion rotation;
     public CellType cellType;
+    public ThrustDirection thrustDirection;
 }
 
 [Serializable]
@@ -79,15 +79,16 @@ public class ShipLoader : MonoBehaviour
                 case CellType.Thruster:
                     var thruster = Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
                     grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, thruster);
-                    thruster.GetComponent<Thruster>().thrustDirection = cell.rotation.eulerAngles.y switch
-                    {
-                        0 => ThrustDirection.Forward,
-                        90 => ThrustDirection.Right,
-                        180 => ThrustDirection.Back,
-                        270 => ThrustDirection.Left,
-                        _ => ThrustDirection.Forward,
-                    };
+                    thruster.GetComponent<Thruster>().thrustDirection = cell.thrustDirection;
                     break;
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name != "Shop")
+        {
+            foreach (var gameObject in GameObject.FindGameObjectsWithTag("ThrustDirection"))
+            {
+                gameObject.SetActive(false);
             }
         }
 
@@ -105,12 +106,27 @@ public class ShipLoader : MonoBehaviour
             {
                 case CellType.Hull:
                 case CellType.Gun:
+                    shipData.data.Add(new ShipData
+                    {
+                        cellType = cell.cellType,
+                        localPosition = cell.transform.localPosition,
+                        rotation = cell.transform.localRotation,
+                    });
+                    break;
                 case CellType.Thruster:
                     shipData.data.Add(new ShipData
                     {
                         cellType = cell.cellType,
                         localPosition = cell.transform.localPosition,
-                        rotation = cell.transform.localRotation
+                        rotation = cell.transform.localRotation,
+                        thrustDirection = cell.transform.localRotation.eulerAngles.y switch
+                        {
+                            0 => ThrustDirection.Forward,
+                            90 => ThrustDirection.Right,
+                            180 => ThrustDirection.Back,
+                            270 => ThrustDirection.Left,
+                            _ => ThrustDirection.Forward,
+                        },
                     });
                     break;
             }
