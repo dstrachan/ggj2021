@@ -112,6 +112,7 @@ public class ShipController : MonoBehaviour
             {
                 thruster.thrustEffect.gameObject.SetActive(false);
                 thruster.thrustEffect.Stop();
+                thruster.GetComponent<AudioSource>()?.Pause();
             }
         }
 
@@ -151,6 +152,7 @@ public class ShipController : MonoBehaviour
                 thruster.thrustEffect.gameObject.SetActive(true);
 
                 thruster.thrustEffect.Play();
+                thruster.GetComponent<AudioSource>()?.Play();
             }
         }
     }
