@@ -107,6 +107,7 @@ MonoBehaviour:
   accuracyPenalty: 100
   deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
   prefab: {fileID: 7726358959561877375, guid: 1c6e7d07c6e0c4c4d9e5080b60b43455, type: 3}
+  DamageFactor: 3
 --- !u!54 &-7863035591081475355
 Rigidbody:
   m_ObjectHideFlags: 0

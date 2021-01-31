@@ -24,6 +24,8 @@ public class Asteroid : MonoBehaviour
 
     public GameObject prefab;
 
+    public float DamageFactor;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -59,6 +61,32 @@ public class Asteroid : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        HitTarget(collision.collider, collision.GetContact(0).point);
+    }
+
+
+    private void HitTarget(Collider collider, Vector3 collisionPoint)
+    {
+        var target = collider.gameObject.GetComponentInParent<ShipController>();
+
+        if (target != null)
+        {
+            target.shipHealth -= DamageFactor * transform.localScale.x;
+            if(target.shipHealth <= 0)
+            {
+                target.ShipDead();
+            }
+            else
+            {
+                AsteroidDestroyed();
+            }
+         
+        }
+    }
+
 
     public void AsteroidDestroyed()
     {
