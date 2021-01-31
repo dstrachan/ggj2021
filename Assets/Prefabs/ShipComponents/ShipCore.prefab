@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 823727589417722372}
   - component: {fileID: 3214875983794349701}
   - component: {fileID: 6350229667980097656}
-  m_Layer: 0
+  - component: {fileID: 4896711533070176570}
+  m_Layer: 9
   m_Name: ShipCore
-  m_TagString: Untagged
+  m_TagString: ShipComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,3 +117,16 @@ MonoBehaviour:
   _hullPrefab: {fileID: 39174816975284584, guid: 052f7819bd38f494bb9f3fab5906a9f1, type: 3}
   _gunPrefab: {fileID: 9204143974621766841, guid: 5e93c6b48c043da4abf0b2ec0fdcead0, type: 3}
   _thrusterPrefab: {fileID: 6421152851246742724, guid: 0c63dc1a0df5b89448d0021871528085, type: 3}
+--- !u!65 &4896711533070176570
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184037206398927825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
