@@ -27,6 +27,16 @@ public class SceneLoader : MonoBehaviour
     {
         _shipLoader.Save();
         var nextScene = SceneManager.GetActiveScene().name == _scene1 ? _scene2 : _scene1;
+
+        if(nextScene == _scene2)
+        {
+            Physics.gravity = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0, -9.1f, 0);
+        }
+
         StartCoroutine(LoadYourAsyncScene(nextScene));
     }
 

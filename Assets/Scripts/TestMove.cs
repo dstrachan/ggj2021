@@ -26,6 +26,8 @@ public class TestMove : MonoBehaviour
 
     private void Start()
     {
+        Physics.gravity = new Vector3(0, -9.1f, 0);
+
         _grid.UpdateGhosts();
         _plane = new Plane(Vector3.up, 0);
     }
@@ -34,6 +36,24 @@ public class TestMove : MonoBehaviour
     {
         var index = Random.Range(0, _shipPrefabs.Length);
         _currentPrefab = _shipPrefabs[index];
+        _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
+    }
+
+    public void SetChild(CellType cellType)
+    {
+        if(cellType == CellType.Hull)
+        {
+            _currentPrefab = _shipPrefabs[0];
+        }
+        if (cellType == CellType.Gun)
+        {
+            _currentPrefab = _shipPrefabs[1];
+        }
+        if (cellType == CellType.Thruster)
+        {
+            _currentPrefab = _shipPrefabs[0];
+        }
+
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
     }
 

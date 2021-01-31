@@ -39,6 +39,8 @@ public class launchButton : MonoBehaviour
 
     void OnMouseDown() {
         clicking = true;
+
+        Physics.gravity = new Vector3(0, -9.1f, 0);
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Shop");
     }
