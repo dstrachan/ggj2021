@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1984910107545979069}
   - component: {fileID: 3162297763804777587}
   - component: {fileID: -2875972747203146485}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ShipHull
   m_TagString: ShipComponent
   m_Icon: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellType: 2
+  thrustDirection: 0
 --- !u!65 &-2875972747203146485
 BoxCollider:
   m_ObjectHideFlags: 0

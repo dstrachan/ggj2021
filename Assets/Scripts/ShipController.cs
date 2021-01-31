@@ -36,7 +36,11 @@ public class ShipController : MonoBehaviour
 
         _shipHealthTotal = shipHealth;
         _player = GameObject.FindGameObjectWithTag("Player");
-        healthDisplay = GameObject.FindGameObjectWithTag("ShipHealth").GetComponent<Image>();
+        var hdGameObject = GameObject.FindGameObjectWithTag("ShipHealth");
+        if (hdGameObject != null)
+        {
+            healthDisplay = hdGameObject.GetComponent<Image>();
+        }
 
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = SceneManager.GetActiveScene().name == "Shop";
@@ -65,8 +69,10 @@ public class ShipController : MonoBehaviour
 
     private void Update()
     {
-        healthDisplay.fillAmount = (shipHealth/ _shipHealthTotal);
-
+        if (healthDisplay != null)
+        {
+            healthDisplay.fillAmount = (shipHealth / _shipHealthTotal);
+        }
     }
 
     public void ShipDead()
@@ -97,7 +103,7 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_rigidbody.velocity.magnitude > maxSpeed)
+        if (_rigidbody != null && _rigidbody.velocity.magnitude > maxSpeed)
         {
             float brakeSpeed = _rigidbody.velocity.magnitude - maxSpeed;
 
@@ -107,13 +113,16 @@ public class ShipController : MonoBehaviour
             _rigidbody.AddForce(-brakeVelocity);  // apply opposing brake force
         }
 
-        foreach (var thruster in _allThrusters)
+        if (_allThrusters != null)
         {
-            if (thruster.thrustEffect != null)
+            foreach (var thruster in _allThrusters)
             {
-                thruster.thrustEffect.gameObject.SetActive(false);
-                thruster.thrustEffect.Stop();
-                thruster.GetComponent<AudioSource>()?.Pause();
+                if (thruster.thrustEffect != null)
+                {
+                    thruster.thrustEffect.gameObject.SetActive(false);
+                    thruster.thrustEffect.Stop();
+                    thruster.GetComponent<AudioSource>()?.Pause();
+                }
             }
         }
 

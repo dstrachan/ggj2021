@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3214875983794349701}
   - component: {fileID: 6350229667980097656}
   - component: {fileID: 4896711533070176570}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: ShipCore
   m_TagString: ShipComponent
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellType: 1
+  thrustDirection: 0
 --- !u!114 &6350229667980097656
 MonoBehaviour:
   m_ObjectHideFlags: 0
