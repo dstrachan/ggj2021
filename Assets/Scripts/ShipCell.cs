@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum CellType
 {
@@ -42,10 +41,6 @@ public class ShipCell : MonoBehaviour
 
     private void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "Shop")
-        {
-            GetComponent<BoxCollider>().isTrigger = true;
-        }
         _grid = GetComponentInParent<ShipGrid>();
     }
 

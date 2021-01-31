@@ -30,10 +30,10 @@ public class GameTimer : MonoBehaviour
     {
         if(!_once && _player.dead)
         {
-            Health.gameObject.SetActive(false);
-            LaunchButton.gameObject.SetActive(true);
-            GameOver.gameObject.SetActive(true);
-            TimerText.gameObject.SetActive(false);
+            Health?.gameObject.SetActive(false);
+            LaunchButton?.gameObject.SetActive(true);
+            GameOver?.gameObject.SetActive(true);
+            TimerText?.gameObject.SetActive(false);
         }
 
         if (TimeLeftSeconds > 0)

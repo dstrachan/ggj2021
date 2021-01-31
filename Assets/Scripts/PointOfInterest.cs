@@ -11,8 +11,8 @@ public class PointOfInterest : MonoBehaviour
     public float indicatorDistance;
 
     private ShipController _player;
-    private GameObject _arrowInstance;
-    private TextMesh _textInstance;
+    public GameObject _arrowInstance;
+    public TextMesh _textInstance;
 
     private bool _once;
     // Start is called before the first frame update
@@ -20,9 +20,7 @@ public class PointOfInterest : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         _arrowInstance = Instantiate(arrow);
-        _arrowInstance.transform.parent = gameObject.transform;
         _textInstance = Instantiate(text);
-        _textInstance.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame
@@ -41,6 +39,7 @@ public class PointOfInterest : MonoBehaviour
         Vector3 textDir = (gameObject.transform.position - _player.transform.position).normalized * (indicatorDistance - 1.5f);
         _textInstance.transform.position = new Vector3(_player.transform.position.x + textDir.x, 0, _player.transform.position.z + textDir.z);
 
+        
         _textInstance.text = $"{Math.Round(Vector3.Distance(gameObject.transform.position, _player.transform.position))}km";
 
         _arrowInstance.transform.LookAt(gameObject.transform);
