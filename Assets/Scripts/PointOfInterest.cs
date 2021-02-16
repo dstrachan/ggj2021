@@ -21,6 +21,8 @@ public class PointOfInterest : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
         _arrowInstance = Instantiate(arrow);
         _textInstance = Instantiate(text);
+
+        _player.shipHealth += _player.shipHealthTotal / 50f;
     }
 
     // Update is called once per frame

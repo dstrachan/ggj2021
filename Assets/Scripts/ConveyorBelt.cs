@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    //public float speed = 2f;
-
-    //private Rigidbody _rigidbody;
-
-    //private void Start()
-    //{
-    //    _rigidbody = GetComponent<Rigidbody>();
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    var distance = transform.forward * speed * Time.deltaTime;
-    //    _rigidbody.position -= distance;
-    //    _rigidbody.MovePosition(_rigidbody.position + distance);
-    //}
-
     public float speed;
 
     private float currentScroll;

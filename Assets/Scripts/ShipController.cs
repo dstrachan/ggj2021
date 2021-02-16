@@ -22,9 +22,9 @@ public class ShipController : MonoBehaviour
     public float shipHealth;
     public float healthMultipler;
 
-    private float _shipHealthTotal;
+    public float shipHealthTotal;
 
-    private Image healthDisplay;
+    public Image healthDisplay;
 
     public bool dead;
 
@@ -35,9 +35,9 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shipHealth = GetComponentsInChildren<ShipCell>().Length * healthMultipler;
+        shipHealth = GetComponentsInChildren<ShipCell>().Where(w=>w.cellType == CellType.Hull).ToArray().Length * healthMultipler;
 
-        _shipHealthTotal = shipHealth;
+        shipHealthTotal = shipHealth;
         _player = GameObject.FindGameObjectWithTag("Player");
         var hdGameObject = GameObject.FindGameObjectWithTag("ShipHealth");
         if (hdGameObject != null)
@@ -90,7 +90,7 @@ public class ShipController : MonoBehaviour
     {
         if (healthDisplay != null)
         {
-            healthDisplay.fillAmount = (shipHealth / _shipHealthTotal);
+            healthDisplay.fillAmount = (shipHealth / shipHealthTotal);
         }
     }
 

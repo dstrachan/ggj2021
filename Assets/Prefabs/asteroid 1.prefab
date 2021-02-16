@@ -100,10 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToDestroy: 200
   distanceToDestroyBehind: 80
-  maxRotation: 100
-  minRotation: 0
-  maxVelocity: 500
-  minVelocity: 200
+  babyAsteroidMaxSize: 1
+  babyAsteroidMinSize: 0.4
   accuracyPenalty: 100
   deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
   prefab: {fileID: 7726358959561877375, guid: 1c6e7d07c6e0c4c4d9e5080b60b43455, type: 3}

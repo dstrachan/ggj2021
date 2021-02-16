@@ -9,11 +9,8 @@ public class Asteroid : MonoBehaviour
     public float distanceToDestroy;
     public float distanceToDestroyBehind;
 
-    public float maxRotation;
-    public float minRotation;
-
-    public float maxVelocity;
-    public float minVelocity;
+    public float babyAsteroidMaxSize;
+    public float babyAsteroidMinSize;
 
     public float accuracyPenalty;
 
@@ -28,21 +25,8 @@ public class Asteroid : MonoBehaviour
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-
         _player = GameObject.FindGameObjectWithTag("Player");
-        var playerRb = _player.GetComponent<Rigidbody>();
-
-
-        var target = playerRb.velocity * 5;
-
-        Vector3 dir = (gameObject.transform.position - (_player.transform.position + target)).normalized;
-
-        // Add some random direction
-        dir = Quaternion.AngleAxis(Random.Range(-accuracyPenalty, accuracyPenalty), Vector3.up) * dir;      
-
-        _rigidbody.AddForce(dir * -Random.Range(minVelocity, maxVelocity));
-        _rigidbody.AddTorque(new Vector3(Random.Range(maxRotation, minRotation), 0, Random.Range(maxRotation, minRotation)));
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -67,14 +51,13 @@ public class Asteroid : MonoBehaviour
         HitTarget(collision.collider, collision.GetContact(0).point);
     }
 
-
     private void HitTarget(Collider collider, Vector3 collisionPoint)
     {
         var target = collider.gameObject.GetComponentInParent<ShipController>();
 
         if (target != null)
         {
-            target.shipHealth -= DamageFactor * transform.localScale.x;
+            target.shipHealth -= DamageFactor * _rigidbody.mass;
             if(target.shipHealth <= 0)
             {
                 target.ShipDead();
@@ -87,22 +70,35 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-
     public void AsteroidDestroyed()
     {
         if (prefab != null)
         {
             if (transform.localScale.x >= 1.4)
             {
-                var smallerones = Random.Range(3, 6);
+                var smallerones = Math.Max(6,(int)Random.Range(transform.localScale.x, transform.localScale.x*2));
 
-                for (int i = 0; i < smallerones; i++)
+                if (smallerones > 3)
                 {
-                    var asteroid = Instantiate(prefab, transform.position, Quaternion.identity);
+                    for (int i = 0; i < smallerones; i++)
+                    {
+                        var asteroid = Instantiate(prefab, RandomPosition(), Quaternion.identity);
 
-                    var scaler = Random.Range(transform.localScale.x / 6f, transform.localScale.x / 4f);
+                        var scaler = Random.Range(babyAsteroidMinSize, babyAsteroidMaxSize);
 
-                    asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+                        asteroid.transform.localScale = new Vector3(scaler, scaler, scaler);
+                        var rigidbody = asteroid.GetComponent<Rigidbody>();
+                        rigidbody.mass = scaler / 2f;
+
+                        var away = (_player.transform.position - transform.position).normalized;
+
+                        // bit random
+                        away = Quaternion.AngleAxis(Random.Range(0, 30), Vector3.up) * away;
+
+                        rigidbody.AddForce(away * -Random.Range(200 * scaler, 400 * scaler));
+                        rigidbody.AddTorque(new Vector3(Random.Range(10 * scaler, 50 * scaler), 0, Random.Range(10 * scaler, 50 * scaler))); ;
+
+                    }
                 }
             }
 
@@ -114,5 +110,12 @@ public class Asteroid : MonoBehaviour
 
     }
 
+    private Vector3 RandomPosition()
+    {
+        var vector2 = Random.insideUnitCircle.normalized * Random.Range(-0.3f, 0.3f);
+
+        var pos = new Vector3(vector2.x + transform.position.x, 0, vector2.y + transform.position.z);
+        return pos;
+    }
 
 }

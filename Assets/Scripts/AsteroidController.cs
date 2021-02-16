@@ -6,9 +6,19 @@ using Random = UnityEngine.Random;
 
 public class AsteroidController : MonoBehaviour
 {
+    public AnimationCurve sizeDistribution;
+    public float maxSize;
+    public float minSize;
+
     public int maxAsteroids;
     public int maxSpawnRadius;
     public int minSpawnRadius;
+
+    public float maxVelocity;
+    public float minVelocity;
+
+    public float maxRotation;
+    public float minRotation;
 
     public float spawnRatePerMinute;
 
@@ -39,8 +49,18 @@ public class AsteroidController : MonoBehaviour
             var asteroid = Instantiate(prefab, pos, Quaternion.identity);
             asteroid.transform.parent = gameObject.transform;
 
-            var scaler = Random.Range(0.5f, 2);
-            asteroid.transform.localScale = new Vector3(transform.localScale.x * scaler, transform.localScale.y * scaler, transform.localScale.z * scaler);
+            var scaler = (sizeDistribution.Evaluate(Random.value) * maxSize-minSize) + minSize;
+
+            asteroid.transform.localScale = new Vector3(scaler, scaler, scaler);
+
+            var rigidbody = asteroid.GetComponent<Rigidbody>();
+            rigidbody.mass = asteroid.transform.localScale.x * scaler;
+
+            // Add some random direction
+            var dir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * transform.forward;
+
+            rigidbody.AddForce(dir * -Random.Range(minVelocity* scaler, maxVelocity* scaler));
+            rigidbody.AddTorque(new Vector3(Random.Range(maxRotation * scaler, minRotation * scaler), 0, Random.Range(maxRotation * scaler, minRotation * scaler)));
 
             _nextPossibleSpawnTime = Time.time + (60.0f / spawnRatePerMinute);
         }
