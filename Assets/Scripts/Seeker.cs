@@ -5,10 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[RequireComponent(typeof(CapsuleCollider))]
 public class Seeker : MonoBehaviour
 {
-    public CapsuleCollider targetArea;
+    internal CapsuleCollider targetArea;
     internal GameObject CurrentTarget;
+
+    private void Start()
+    {
+        targetArea = GetComponent<CapsuleCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

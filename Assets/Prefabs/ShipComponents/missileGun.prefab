@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1504e46e2dc4e34d98d8776924352b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  bulletSpeed: 200
-  range: 500
+  damage: 500
+  bulletSpeed: 80
+  range: 60
   secondsBetweenShots: 5
   shootPoint: {fileID: 1019957794725067982}
   bullet: {fileID: 7555997819574577877, guid: 9531f9ec56640c34c836cf527bd5a386, type: 3}

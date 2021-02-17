@@ -16,17 +16,24 @@ public class Asteroid : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GameObject _player;
+    private Target _asteroidTarget;
 
-    public ParticleSystem deadEffect;
+    public MultiParticle deadEffect;
 
     public GameObject prefab;
 
     public float DamageFactor;
 
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _asteroidTarget = GetComponent<Target>();
+
         _rigidbody = GetComponent<Rigidbody>();
+
+        _asteroidTarget.hitPoints = 50 * _rigidbody.mass;
+
     }
 
     void Update()
@@ -104,7 +111,9 @@ public class Asteroid : MonoBehaviour
 
         }
 
+
         var deadEffect = Instantiate(this.deadEffect, transform.position, Quaternion.identity);
+        deadEffect.transform.localScale = new Vector3(transform.localScale.x*0.1f, transform.localScale.y * 0.1f, transform.localScale.z * 0.1f);
         deadEffect.GetComponent<AutoDelete>().Started = true;
         Destroy(gameObject);
 

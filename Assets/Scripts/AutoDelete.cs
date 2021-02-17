@@ -1,28 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AutoDelete : MonoBehaviour
 {
-    private ParticleSystem ps;
-    private AudioSource audioSource;
+    private ParticleSystem[] effects;
+    private AudioSource[] audioSources;
+    private bool somethingStillHappening;
 
     public bool Started;
 
     public void Start()
     {
-        ps = GetComponent<ParticleSystem>();
-        audioSource = GetComponent<AudioSource>();
+        effects = GetComponentsInChildren<ParticleSystem>();
+        audioSources = GetComponentsInChildren<AudioSource>();
     }
 
     public void Update()
     {
-        if (ps)
+        somethingStillHappening = false;
+        if (effects.Any())
         {
-            if (Started && !ps.IsAlive() && (audioSource?.isPlaying ?? false))
+            foreach (var effect in effects)
             {
-                Destroy(gameObject);
+                if(effect.IsAlive())
+                {
+                    somethingStillHappening = true;
+                    break;
+                }
             }
         }
+
+        if(audioSources.Any())
+        {
+            foreach (var audio in audioSources)
+            {
+                if(audio?.isPlaying ?? false)
+                {
+                    somethingStillHappening = true;
+                    break;
+                }
+            }
+        }
+
+        if(!somethingStillHappening)
+        {
+            Destroy(gameObject);
+        }
+    
     }
 }

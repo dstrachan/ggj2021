@@ -8,7 +8,7 @@ public class DelayedMusicPlay : MonoBehaviour
     public float delay = 1.0f;
     void Start()
     {
-            this.GetComponent<AudioSource>().PlayDelayed(delay);
+        GetComponent<AudioSource>().PlayDelayed(delay);
     }
 
     // Update is called once per frame

@@ -35,7 +35,7 @@ public class AsteroidController : MonoBehaviour
         AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length;
 
         //Update asteroid count every 2 seconds
-        RunEachThisManySeconds(() => AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length, 2);
+        RunEachThisManySeconds(() => AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length, 5);
     }
 
     void Update()
