@@ -20,6 +20,9 @@ public class AsteroidController : MonoBehaviour
     public float maxRotation;
     public float minRotation;
 
+    public float distanceToDestory = 200;
+    public float distanceToDestroyBehind = 80;
+
     public float spawnRatePerMinute;
 
     public GameObject prefab;
@@ -27,43 +30,74 @@ public class AsteroidController : MonoBehaviour
     private GameObject _player;
     private float _nextPossibleSpawnTime;
 
-    private int AsteroidCount = 0;
+    private GameObject[] asteroids;
 
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length;
+        asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
 
         //Update asteroid count every 2 seconds
-        RunEachThisManySeconds(() => AsteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length, 5);
+        RunEachThisManySeconds(() => asteroids = GameObject.FindGameObjectsWithTag("Asteroid"), 5);
     }
 
     void Update()
     {
-        if (AsteroidCount < maxAsteroids && CanSpawn())
+        if (asteroids.Length < maxAsteroids && CanSpawn())
         {
-            var vector2 = Random.insideUnitCircle.normalized * Random.Range(minSpawnRadius, maxSpawnRadius);
-
-            var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
-
-            var asteroid = Instantiate(prefab, pos, Quaternion.identity);
-            asteroid.transform.parent = gameObject.transform;
-
-            var scaler = (sizeDistribution.Evaluate(Random.value) * maxSize-minSize) + minSize;
-
-            asteroid.transform.localScale = new Vector3(scaler, scaler, scaler);
-
-            var rigidbody = asteroid.GetComponent<Rigidbody>();
-            rigidbody.mass = asteroid.transform.localScale.x * scaler;
-
-            // Add some random direction
-            var dir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * transform.forward;
-
-            rigidbody.AddForce(dir * -Random.Range(minVelocity* scaler, maxVelocity* scaler));
-            rigidbody.AddTorque(new Vector3(Random.Range(maxRotation * scaler, minRotation * scaler), 0, Random.Range(maxRotation * scaler, minRotation * scaler)));
+            var asteroid = Instantiate(prefab, new Vector3(1000,1000,1000), Quaternion.identity);
+            asteroid.transform.parent = gameObject.transform;           
+            RandomlyPlaceAsteroid(asteroid);
 
             _nextPossibleSpawnTime = Time.time + (60.0f / spawnRatePerMinute);
         }
+
+        foreach (var asteroid in asteroids)
+        {
+            MoveAsteroidBackToPlayer(asteroid);
+        }
+    }
+
+    private void MoveAsteroidBackToPlayer(GameObject asteroid)
+    {
+        if (_player != null)
+        {
+            var lookAtPlayer = _player.transform.position - asteroid.transform.position;
+
+            var dot = Vector3.Dot(_player.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
+
+            var destroy = distanceToDestory;
+            if (dot > 0)
+            {
+                destroy = distanceToDestroyBehind;
+            }
+            if (Vector3.Distance(_player.transform.position, asteroid.transform.position) > destroy)
+            {
+                RandomlyPlaceAsteroid(asteroid);
+            }
+        }
+    }
+
+    private void RandomlyPlaceAsteroid(GameObject asteroid)
+    {
+        var vector2 = Random.insideUnitCircle.normalized * Random.Range(minSpawnRadius, maxSpawnRadius);
+
+        var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
+
+        asteroid.transform.position = pos;
+
+        var scaler = (sizeDistribution.Evaluate(Random.value) * maxSize - minSize) + minSize;
+
+        asteroid.transform.localScale = new Vector3(scaler, scaler, scaler);
+
+        var rigidbody = asteroid.GetComponent<Rigidbody>();
+        rigidbody.mass = asteroid.transform.localScale.x * scaler;
+
+        // Add some random direction
+        var dir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * transform.forward;
+
+        rigidbody.AddForce(dir * -Random.Range(minVelocity * scaler, maxVelocity * scaler));
+        rigidbody.AddTorque(new Vector3(Random.Range(maxRotation * scaler, minRotation * scaler), 0, Random.Range(maxRotation * scaler, minRotation * scaler)));
     }
 
     private bool CanSpawn() => Time.time > _nextPossibleSpawnTime;

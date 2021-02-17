@@ -90,12 +90,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1
   shipHealth: 1
-  healthMultipler: 10
+  healthMultipler: 5
   shipHealthTotal: 0
   healthDisplay: {fileID: 0}
   dead: 0
   score: 0
-  deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
+  deadEffect: {fileID: -8466965003589312789, guid: 93da5631a502188479f49dd0db2570b3, type: 3}
 --- !u!82 &586874228
 AudioSource:
   m_ObjectHideFlags: 0

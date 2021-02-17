@@ -30,7 +30,7 @@ public class ShipController : MonoBehaviour
 
     public float score;
 
-    public ParticleSystem deadEffect;
+    public MultiParticle deadEffect;
 
     // Start is called before the first frame update
     void Start()

@@ -36,23 +36,6 @@ public class Asteroid : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        var lookAtPlayer = _player.transform.position - transform.position;
-
-        var dot = Vector3.Dot(_player.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
-
-        var destroy = distanceToDestroy;
-        if(dot > 0)
-        {
-            destroy = distanceToDestroyBehind;
-        }
-        if (Vector3.Distance(_player.transform.position, transform.position) > destroy)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         HitTarget(collision.collider, collision.GetContact(0).point);
