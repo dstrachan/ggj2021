@@ -16,7 +16,6 @@ public class Asteroid : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private GameObject _player;
-    private Target _asteroidTarget;
 
     public MultiParticle deadEffect;
 
@@ -28,11 +27,9 @@ public class Asteroid : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _asteroidTarget = GetComponent<Target>();
 
         _rigidbody = GetComponent<Rigidbody>();
 
-        _asteroidTarget.hitPoints = 50 * _rigidbody.mass;
 
     }
 

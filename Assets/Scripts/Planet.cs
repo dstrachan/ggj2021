@@ -5,14 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Planet : MonoBehaviour
 {
-    public float Speed;
+    public int Speed;
     private Rigidbody _rb;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.AddTorque(new Vector3(0, 0, Speed));
+        _rb.AddTorque(transform.up * Speed);
     }
 
     // Update is called once per frame

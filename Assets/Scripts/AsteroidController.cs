@@ -46,7 +46,8 @@ public class AsteroidController : MonoBehaviour
         if (asteroids.Length < maxAsteroids && CanSpawn())
         {
             var asteroid = Instantiate(prefab, new Vector3(1000,1000,1000), Quaternion.identity);
-            asteroid.transform.parent = gameObject.transform;           
+            asteroid.transform.parent = gameObject.transform;
+
             RandomlyPlaceAsteroid(asteroid);
 
             _nextPossibleSpawnTime = Time.time + (60.0f / spawnRatePerMinute);
@@ -60,18 +61,18 @@ public class AsteroidController : MonoBehaviour
 
     private void MoveAsteroidBackToPlayer(GameObject asteroid)
     {
-        if (_player != null)
+        if (_player != null && asteroid != null)
         {
             var lookAtPlayer = _player.transform.position - asteroid.transform.position;
 
             var dot = Vector3.Dot(_player.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
 
-            var destroy = distanceToDestory;
+            var destroyDistance = distanceToDestory;
             if (dot > 0)
             {
-                destroy = distanceToDestroyBehind;
+                destroyDistance = distanceToDestroyBehind;
             }
-            if (Vector3.Distance(_player.transform.position, asteroid.transform.position) > destroy)
+            if (Vector3.Distance(_player.transform.position, asteroid.transform.position) > destroyDistance)
             {
                 RandomlyPlaceAsteroid(asteroid);
             }
@@ -86,12 +87,14 @@ public class AsteroidController : MonoBehaviour
 
         asteroid.transform.position = pos;
 
-        var scaler = (sizeDistribution.Evaluate(Random.value) * maxSize - minSize) + minSize;
+        var scaler = sizeDistribution.RandomFromCurve(minSize, maxSize);
 
         asteroid.transform.localScale = new Vector3(scaler, scaler, scaler);
 
         var rigidbody = asteroid.GetComponent<Rigidbody>();
         rigidbody.mass = asteroid.transform.localScale.x * scaler;
+
+        asteroid.GetComponent<Target>().hitPoints = 50 * rigidbody.mass;
 
         // Add some random direction
         var dir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * transform.forward;
@@ -99,6 +102,7 @@ public class AsteroidController : MonoBehaviour
         rigidbody.AddForce(dir * -Random.Range(minVelocity * scaler, maxVelocity * scaler));
         rigidbody.AddTorque(new Vector3(Random.Range(maxRotation * scaler, minRotation * scaler), 0, Random.Range(maxRotation * scaler, minRotation * scaler)));
     }
+
 
     private bool CanSpawn() => Time.time > _nextPossibleSpawnTime;
 

@@ -8,6 +8,7 @@ public enum CellType
     Gun,
     Thruster,
     Missile,
+    ShieldGenerator,
 }
 
 public class ShipCell : MonoBehaviour

@@ -196,9 +196,9 @@ GameObject:
   - component: {fileID: 7176375330778525807}
   - component: {fileID: 6068671700317323210}
   - component: {fileID: 8348749620925549312}
+  - component: {fileID: 6214025852361296778}
   - component: {fileID: 3277958767565293586}
   - component: {fileID: 2051598680701903922}
-  - component: {fileID: 6214025852361296778}
   m_Layer: 10
   m_Name: missile
   m_TagString: Untagged
@@ -272,6 +272,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6214025852361296778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555997819574577877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2960ba5c76ca644bbdcb3f61ad9ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 2673433576283209426, guid: 6c02ee125779be742b263ffb530c180c, type: 3}
+  lockOnRange: 20
+  maxSpeed: 12
+  seeker: {fileID: 7639419125074959711}
+  thrust: {fileID: 4406555844888326306}
+  boostClip: {fileID: 4192641651629775852}
 --- !u!54 &3277958767565293586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -301,24 +319,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.57149625, y: 0.57149625, z: 0.7202628}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6214025852361296778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555997819574577877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2960ba5c76ca644bbdcb3f61ad9ae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 2673433576283209426, guid: 6c02ee125779be742b263ffb530c180c, type: 3}
-  lockOnRange: 10
-  maxSpeed: 10
-  seeker: {fileID: 7639419125074959711}
-  thrust: {fileID: 4406555844888326306}
-  boostClip: {fileID: 4192641651629775852}
 --- !u!1001 &1098868266093171743
 PrefabInstance:
   m_ObjectHideFlags: 0
