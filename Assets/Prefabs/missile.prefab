@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 2673433576283209426, guid: 6c02ee125779be742b263ffb530c180c, type: 3}
-  lockOnRange: 20
+  lockOnRange: 13
   maxSpeed: 12
   seeker: {fileID: 7639419125074959711}
   thrust: {fileID: 4406555844888326306}
