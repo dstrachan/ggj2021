@@ -79,11 +79,15 @@ public class ShipController : MonoBehaviour
 
     private void HitTarget(Collider collider)
     {
-        score += 1;
+      
         var poi = collider.gameObject.GetComponentInParent<PointOfInterest>();
-        Destroy(poi.gameObject);
-        Destroy(poi._arrowInstance);
-        Destroy(poi._textInstance);
+        if (poi != null)
+        {
+            score += 1;
+            Destroy(poi.gameObject);
+            Destroy(poi._arrowInstance);
+            Destroy(poi._textInstance);
+        }
     }
 
     private void Update()

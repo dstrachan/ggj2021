@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
 
     public GameObject bullet;
     public ShipController player;
+    public KeyCode ShootKey;
 
     private float _nextPossibleShootTime;
 
@@ -27,7 +28,7 @@ public class Gun : MonoBehaviour
     {
         if (!player.dead)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(ShootKey))
             {
                 Shoot();
             }
