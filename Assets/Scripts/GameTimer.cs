@@ -20,7 +20,7 @@ public class GameTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
+        _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
 
         TimerText.text = TimeLeftSeconds.ToString();
     }

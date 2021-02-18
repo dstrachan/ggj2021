@@ -26,7 +26,7 @@ public class Asteroid : MonoBehaviour
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
 
         _rigidbody = GetComponent<Rigidbody>();
 

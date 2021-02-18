@@ -8,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Seeker : MonoBehaviour
 {
+    public bool ExclusiveSeeking = false;
+
     internal CapsuleCollider targetArea;
     internal GameObject CurrentTarget;
 
@@ -20,9 +22,11 @@ public class Seeker : MonoBehaviour
     {
         if (CurrentTarget == null)
         {
-            if (other.gameObject.GetComponent<Target>())
+            var target = other.gameObject.GetComponent<Target>();
+            if (target != null && !target.targeted)
             {
-                CurrentTarget = other.gameObject;
+                CurrentTarget = target.gameObject;
+                target.targeted = ExclusiveSeeking;
             }
         }
     }

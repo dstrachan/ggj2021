@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     public float hitPoints;
   
     internal bool alive = true;
+    internal bool targeted = false;
     //internal Collider collider;
 
     public UnityEvent deadEvents;

@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
 
         _rigidbody = GetComponent<Rigidbody>();
 
@@ -41,7 +41,12 @@ public class Projectile : MonoBehaviour
         var target = collider.gameObject.GetComponent<Target>();
 
         if (target != null)
-        {           
+        {
+            var isMissile = GetComponent<Missile>();
+            if (isMissile)
+            {
+                target.targeted = false;
+            }
             target.hitPoints -= damage;
 
             var deadEffect = Instantiate(hitEffect, transform.position, Quaternion.identity);

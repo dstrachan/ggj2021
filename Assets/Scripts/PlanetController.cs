@@ -15,7 +15,7 @@ public class PlanetController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
 
         for (int i = 0; i < numberOfPlanets; i++)
         {

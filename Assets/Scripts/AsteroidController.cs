@@ -34,7 +34,7 @@ public class AsteroidController : MonoBehaviour
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
         asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
 
         //Update asteroid count every 2 seconds

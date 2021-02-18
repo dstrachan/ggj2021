@@ -38,8 +38,8 @@ public class ShipController : MonoBehaviour
         shipHealth = GetComponentsInChildren<ShipCell>().Where(w=>w.cellType == CellType.Hull).ToArray().Length * healthMultipler;
 
         shipHealthTotal = shipHealth;
-        _player = GameObject.FindGameObjectWithTag("Player");
-        var hdGameObject = GameObject.FindGameObjectWithTag("ShipHealth");
+        _player = GameObject.FindGameObjectWithTag(Tags.Player);
+        var hdGameObject = GameObject.FindGameObjectWithTag(Tags.ShipHealth);
         if (hdGameObject != null)
         {
             healthDisplay = hdGameObject.GetComponent<Image>();

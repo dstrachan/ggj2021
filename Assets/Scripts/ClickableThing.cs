@@ -11,7 +11,7 @@ public class ClickableThing : MonoBehaviour
 
     void Start()
     {
-        testMove = GameObject.FindGameObjectWithTag("Test Move").GetComponent<TestMove>();
+        testMove = GameObject.FindGameObjectWithTag(Tags.TestMove).GetComponent<TestMove>();
     }
 
     // Update is called once per frame
