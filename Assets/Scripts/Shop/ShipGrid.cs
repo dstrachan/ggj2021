@@ -90,6 +90,7 @@ public class ShipGrid : MonoBehaviour
             {
                 case CellType.Core:
                 case CellType.Hull:
+                case CellType.ShieldGenerator:
                     keys.Add(cell.Key);
                     break;
             }

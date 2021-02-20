@@ -29,6 +29,9 @@ public class ShipLoader : MonoBehaviour
     [SerializeField] private GameObject _shipPrefab;
     [SerializeField] private GameObject _hullPrefab;
     [SerializeField] private GameObject _gunPrefab;
+    [SerializeField] private GameObject _pointDefencePrefab;
+    [SerializeField] private GameObject _shieldPrefab;
+    [SerializeField] private GameObject _missilePrefab;
     [SerializeField] private GameObject _thrusterPrefab;
 
     private ShipGrid _shipGrid;
@@ -81,12 +84,19 @@ public class ShipLoader : MonoBehaviour
             switch (cell.cellType)
             {
                 case CellType.Hull:
-                    var hull = Instantiate(_hullPrefab, cell.localPosition, cell.rotation, obj.transform);
-                    grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, hull);
+                    CreateAndAdd(obj, grid, cell, _hullPrefab);
                     break;
                 case CellType.Gun:
-                    var gun = Instantiate(_gunPrefab, cell.localPosition, cell.rotation, obj.transform);
-                    grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, gun);
+                    CreateAndAdd(obj, grid, cell, _gunPrefab);
+                    break;
+                case CellType.PointDefense:
+                    CreateAndAdd(obj, grid, cell, _pointDefencePrefab);
+                    break;
+                case CellType.ShieldGenerator:
+                    CreateAndAdd(obj, grid, cell, _shieldPrefab);
+                    break;
+                case CellType.Missile:
+                    CreateAndAdd(obj, grid, cell, _missilePrefab);
                     break;
                 case CellType.Thruster:
                     var thruster = Instantiate(_thrusterPrefab, cell.localPosition, cell.rotation, obj.transform);
@@ -119,6 +129,12 @@ public class ShipLoader : MonoBehaviour
         return obj;
     }
 
+    private void CreateAndAdd(GameObject obj, ShipGrid grid, ShipData cell, GameObject prefab)
+    {
+        var part = Instantiate(prefab, cell.localPosition, cell.rotation, obj.transform);
+        grid.Add((int)cell.localPosition.x, (int)cell.localPosition.z, part);
+    }
+
     public void ExportToPlayerPrefs(string key) => PlayerPrefs.SetString(key, ExportToJson());
 
     public string ExportToJson()
@@ -131,20 +147,13 @@ public class ShipLoader : MonoBehaviour
 
         foreach (var cell in _shipGrid.cells.Values)
         {
-            switch (cell.cellType)
+            gameData.shipData.Add(new ShipData
             {
-                case CellType.Hull:
-                case CellType.Gun:
-                case CellType.Thruster:
-                    gameData.shipData.Add(new ShipData
-                    {
-                        cellType = cell.cellType,
-                        localPosition = cell.transform.localPosition,
-                        rotation = cell.transform.localRotation,
-                        thrustDirection = cell.thrustDirection,
-                    });
-                    break;
-            }
+                cellType = cell.cellType,
+                localPosition = cell.transform.localPosition,
+                rotation = cell.transform.localRotation,
+                thrustDirection = cell.thrustDirection,
+            });                           
         }
 
         return JsonUtility.ToJson(gameData);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SphereCollider))]
 public class Seeker : MonoBehaviour
@@ -17,30 +18,44 @@ public class Seeker : MonoBehaviour
     internal SphereCollider targetArea;
     internal Target currentTarget;
 
+    private bool _inert;
+
     void Start()
     {
         targetArea = GetComponent<SphereCollider>();
         targetLostDistance = targetArea.radius * targetArea.transform.localScale.x;
+       
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            targetArea.enabled = false;
+            _inert = true;
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (currentTarget != null && alwaysTargetClosest)
+        if (!_inert)
         {
-            var newTarget = other.gameObject.GetComponent<Target>();
-            if (Vector3.Distance(newTarget.transform.position, transform.position) < Vector3.Distance(currentTarget.transform.position, transform.position))
+            if (currentTarget != null && alwaysTargetClosest)
             {
-                currentTarget.targeted = false;
-                SetTarget(newTarget);
+                var newTarget = other.gameObject.GetComponent<Target>();
+                if (Vector3.Distance(newTarget.transform.position, transform.position) < Vector3.Distance(currentTarget.transform.position, transform.position))
+                {
+                    currentTarget.targeted = false;
+                    SetTarget(newTarget);
+                }
             }
         }
     }
     void OnTriggerEnter(Collider other)
     {
-        if (currentTarget == null)
+        if (!_inert)
         {
-            var target = other.gameObject.GetComponent<Target>();
-            SetTarget(target);
+            if (currentTarget == null)
+            {
+                var target = other.gameObject.GetComponent<Target>();
+                SetTarget(target);
+            }
         }
     }
 
@@ -55,12 +70,15 @@ public class Seeker : MonoBehaviour
 
     private void Update()
     {
-        if(losesTargetWhenOutOfRange && 
-            currentTarget != null && 
-            Vector3.Distance(transform.position, currentTarget.transform.position) >= targetLostDistance)
+        if (!_inert)
         {
-            currentTarget.targeted = false;
-            currentTarget = null;
+            if (losesTargetWhenOutOfRange &&
+            currentTarget != null &&
+            Vector3.Distance(transform.position, currentTarget.transform.position) >= targetLostDistance)
+            {
+                currentTarget.targeted = false;
+                currentTarget = null;
+            }
         }
     }
 

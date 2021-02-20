@@ -58,8 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385c14fa17395204b859177d1d2c3de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTimer: {fileID: 0}
   shipName: ship
   _shipPrefab: {fileID: 3299420318512661945, guid: b8380a77a4e187d4db16759485592130, type: 3}
   _hullPrefab: {fileID: 39174816975284584, guid: 052f7819bd38f494bb9f3fab5906a9f1, type: 3}
   _gunPrefab: {fileID: 9204143974621766841, guid: 5e93c6b48c043da4abf0b2ec0fdcead0, type: 3}
+  _pointDefencePrefab: {fileID: 8245347330554609286, guid: 00403cdedcd4f6e4e9886513f95f2697, type: 3}
+  _shieldPrefab: {fileID: 8786524829103660042, guid: 2b280475d68040c4bb1de2911db0777e, type: 3}
+  _missilePrefab: {fileID: 5170477302523080394, guid: 4e31247de93e2f04bbad3f285bc3f739, type: 3}
   _thrusterPrefab: {fileID: 6421152851246742724, guid: 0c63dc1a0df5b89448d0021871528085, type: 3}

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Turret : MonoBehaviour
 {
     private Seeker seeker;
     private Gun[] guns;
     private bool noTarget;
+    private bool _inert;
 
     private void Start()
     {
@@ -21,29 +22,37 @@ public class Turret : MonoBehaviour
         {
             gun.enabled = false;
         }
+
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            _inert = true;
+        }
     }
 
     private void Update()
     {
-        foreach (var gun in guns)
-        {
-            gun.enabled = false;
-        }
-
-        if (seeker != null && seeker.currentTarget != null)
+        if (!_inert)
         {
             foreach (var gun in guns)
             {
-                gun.enabled = true;
-                gun.Shoot();
+                gun.enabled = false;
             }
 
-            // lead targets a bit 
-            var currentTargetRb = seeker.currentTarget.GetComponent<Rigidbody>();
+            if (seeker != null && seeker.currentTarget != null)
+            {
+                foreach (var gun in guns)
+                {
+                    gun.enabled = true;
+                    gun.Shoot();
+                }
 
-            var target = seeker.currentTarget.transform.position + (currentTargetRb.velocity.normalized);
+                // lead targets a bit 
+                var currentTargetRb = seeker.currentTarget.GetComponent<Rigidbody>();
 
-            transform.LookAt(target);
+                var target = seeker.currentTarget.transform.position + (currentTargetRb.velocity.normalized);
+
+                transform.LookAt(target);
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Shield : MonoBehaviour
@@ -24,15 +25,19 @@ public class Shield : MonoBehaviour
     public AudioSource powerDown;
     public GameObject emission;
 
+    private bool _inert;
+
     void Start()
     {
         _shieldCurrentHitpoints = shieldTotalHitpoints;
 
         _player = GameObject.FindGameObjectWithTag(Tags.Player);
         var shield = GameObject.FindGameObjectWithTag(Tags.ShipShield);
+        
         if(shield != null)
         {
             _shieldDisplay = shield.GetComponent<Image>();
+            _shieldDisplay.enabled = true;
             _shieldDisplay.gameObject.SetActive(true);
         }  
 
@@ -43,6 +48,13 @@ public class Shield : MonoBehaviour
         buzz.radius = shieldSize / 2;
         shieldBub.startSize = shieldSize;
         sphereCollider.radius = shieldSize / 2;
+
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            _particleSystem.enabled = false;
+            sphereCollider.enabled = false;
+            _shieldCurrentHitpoints = 0;
+        }
     }
 
     private void Update()

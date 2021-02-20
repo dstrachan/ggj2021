@@ -1,18 +1,6 @@
 using System.Linq;
 using UnityEngine;
 
-public enum CellType
-{
-    Ghost,
-    Core,
-    Hull,
-    Gun,
-    Thruster,
-    Missile,
-    ShieldGenerator,
-    PointDefense,
-}
-
 public class ShipCell : MonoBehaviour
 {
     public ShipCell forward
@@ -42,7 +30,6 @@ public class ShipCell : MonoBehaviour
     public ThrustDirection thrustDirection;
 
     private ShipGrid _grid;
-    private CellType[] AnywhereTypes = new[] { CellType.Hull, CellType.Core, CellType.ShieldGenerator, CellType.PointDefense };
 
     private void Awake()
     {

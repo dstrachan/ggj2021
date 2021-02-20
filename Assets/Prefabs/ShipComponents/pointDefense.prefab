@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1504e46e2dc4e34d98d8776924352b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 3
   bulletSpeed: 1600
   range: 16
   numberOfBulletsPerBurst: 3
@@ -414,11 +414,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1504e46e2dc4e34d98d8776924352b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 3
   bulletSpeed: 1600
   range: 16
   numberOfBulletsPerBurst: 3
-  delayDuringBurst: 0.1
+  delayDuringBurst: 0.2
   secondsBetweenShots: 0.4
   shootPoint: {fileID: 6396238248886730309}
   bullet: {fileID: 18111079603249894, guid: e3984f5cc85b81f419f4479097aa41e9, type: 3}
