@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class TestMove : MonoBehaviour
@@ -49,19 +50,8 @@ public class TestMove : MonoBehaviour
     {
         Destroy(_child);
 
-        if (cellType == CellType.Hull)
-        {
-            _currentPrefab = _shipPrefabs[0];
-        }
-        if (cellType == CellType.Gun)
-        {
-            _currentPrefab = _shipPrefabs[1];
-        }
-        if (cellType == CellType.Thruster)
-        {
-            _currentPrefab = _shipPrefabs[2];
-        }
-
+        _currentPrefab = _shipPrefabs.First(f=>f.GetComponent<ShipCell>().cellType == cellType);
+        
         _child = Instantiate(_currentPrefab, transform.position, _currentPrefab.transform.rotation, transform);
     }
 

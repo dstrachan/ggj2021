@@ -131,13 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  bulletSpeed: 300
-  range: 25
-  numberOfBulletsPerShot: 1
+  bulletSpeed: 2000
+  range: 30
+  numberOfBulletsPerBurst: 1
+  delayDuringBurst: 1
   secondsBetweenShots: 0.3
   shootPoint: {fileID: 6509000712785226201}
   bullet: {fileID: 18111079603249894, guid: 2829e6350e30ab14d84aee7f800e3f99, type: 3}
-  player: {fileID: 0}
   ShootKey: 32
 --- !u!114 &5624383966747387333
 MonoBehaviour:
@@ -165,7 +165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 91221e0b08c0e484f8aafd272a50d015, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.441
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

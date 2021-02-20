@@ -8,27 +8,28 @@ public class Gun : MonoBehaviour
     public float damage;
     public float bulletSpeed;
     public float range;
-    public int numberOfBulletsPerShot = 1;
+    public int numberOfBulletsPerBurst = 1;
+    public float delayDuringBurst = 1;
     public float secondsBetweenShots;
 
     public Transform shootPoint;
 
     public GameObject bullet;
-    public ShipController player;
     public KeyCode ShootKey;
 
     private float _nextPossibleShootTime;
+    private ShipController _player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
+        _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!player.dead)
+        if (!_player.dead)
         {
             if (Input.GetKey(ShootKey))
             {
@@ -43,11 +44,12 @@ public class Gun : MonoBehaviour
         {
             LoopThisManyIterationsWithDelay(() =>
             {
-                var bullet = Instantiate(this.bullet, shootPoint.position, transform.rotation);
+                var bullet = Instantiate(this.bullet, shootPoint.position, shootPoint.rotation);
 
                 var projectile = bullet.GetComponent<Projectile>();
+                var rb = bullet.GetComponent<Rigidbody>();
 
-                projectile.speed = bulletSpeed;
+                projectile.speed = bulletSpeed * rb.mass;
                 projectile.damage = damage;
                 projectile.range = range;
 
@@ -58,7 +60,7 @@ public class Gun : MonoBehaviour
                     audio.Play();
                 }
 
-            }, numberOfBulletsPerShot, 0.3f);
+            }, numberOfBulletsPerBurst, delayDuringBurst);
 
              _nextPossibleShootTime = Time.time + secondsBetweenShots;
 

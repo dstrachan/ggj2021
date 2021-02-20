@@ -43,8 +43,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4e58cd940912a4dbe6c60d87f79af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAsteroids: 100
-  maxSpawnRadius: 200
+  sizeDistribution:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.15350342
+      inSlope: 0.09895422
+      outSlope: 0.09895422
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.24743783
+    - serializedVersion: 3
+      time: 0.9846807
+      value: 0.4656643
+      inSlope: 0.84632045
+      outSlope: 0.84632045
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10292411
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSize: 3.5
+  minSize: 1
+  maxAsteroids: 50
+  maxSpawnRadius: 80
   minSpawnRadius: 50
-  spawnRatePerMinute: 800
+  maxVelocity: 200
+  minVelocity: 50
+  maxRotation: 50
+  minRotation: 10
+  distanceToDestory: 200
+  distanceToDestroyBehind: 80
+  spawnRatePerMinute: 500
   prefab: {fileID: 1860091033788358672, guid: 89fc73642a952ea41bc717e9e02ce55b, type: 3}

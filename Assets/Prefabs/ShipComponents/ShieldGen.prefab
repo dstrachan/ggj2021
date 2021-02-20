@@ -5090,6 +5090,10 @@ PrefabInstance:
       propertyPath: emission
       value: 
       objectReference: {fileID: 355100659586711245}
+    - target: {fileID: 6223250126667559283, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: shieldForce
+      value: 900
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
 --- !u!4 &5048390293492793422 stripped

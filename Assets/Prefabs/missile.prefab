@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2229549158177520747}
-  - component: {fileID: 5041242463955266355}
   - component: {fileID: 7639419125074959711}
+  - component: {fileID: 1118851133870350403}
   m_Layer: 10
   m_Name: Seeker
   m_TagString: Untagged
@@ -32,20 +32,6 @@ Transform:
   m_Father: {fileID: 7176375330778525807}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5041242463955266355
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639019809801194627}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 15
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7639419125074959711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276a41d984ab7f74a8353c650c8a44a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExclusiveSeeking: 1
+  exclusiveSeeking: 0
+  alwaysTargetClosest: 0
+  losesTargetWhenOutOfRange: 0
+--- !u!135 &1118851133870350403
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639019809801194627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5122841426979851027
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b1cd427561617084888924cf7e8c5bdd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.403
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -285,8 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2960ba5c76ca644bbdcb3f61ad9ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRange: 7
   hitEffect: {fileID: 2673433576283209426, guid: 6c02ee125779be742b263ffb530c180c, type: 3}
-  lockOnRange: 13
+  lockOnRange: 10
   maxSpeed: 12
   seeker: {fileID: 7639419125074959711}
   thrust: {fileID: 4406555844888326306}

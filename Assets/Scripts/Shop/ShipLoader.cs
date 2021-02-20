@@ -23,10 +23,7 @@ public class GameData
 public class ShipLoader : MonoBehaviour
 {
     public static bool clearData = true;
-
-    public float shopTime = 30;
-    public float flightTime = 60;
-    public float scoreMultiplier = 15;
+    public GameTimer gameTimer;
     public string shipName = "ship";
 
     [SerializeField] private GameObject _shipPrefab;
@@ -71,12 +68,13 @@ public class ShipLoader : MonoBehaviour
         if (gameData == null)
         {
             _gameData = new GameData();
-            SetTimer(_gameData);
+            gameTimer.SetTimer(_gameData);
+
             return obj;
         }
 
-        SetTimer(gameData);
-
+        gameTimer.SetTimer(gameData);
+        
         var grid = obj.GetComponentInChildren<ShipGrid>();
         foreach (var cell in gameData.shipData)
         {
@@ -152,15 +150,5 @@ public class ShipLoader : MonoBehaviour
         return JsonUtility.ToJson(gameData);
     }
 
-    private void SetTimer(GameData gameData)
-    {
-        if (SceneManager.GetActiveScene().name == "Shop")
-        {
-            FindObjectOfType<GameTimer>().TimeLeftSeconds = shopTime + ((gameData.score + 1) * scoreMultiplier);
-        }
-        else
-        {
-            FindObjectOfType<GameTimer>().TimeLeftSeconds = flightTime + ((gameData.score + 1) * scoreMultiplier);
-        }
-    }
+
 }

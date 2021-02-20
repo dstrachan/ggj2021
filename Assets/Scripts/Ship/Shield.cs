@@ -29,7 +29,12 @@ public class Shield : MonoBehaviour
         _shieldCurrentHitpoints = shieldTotalHitpoints;
 
         _player = GameObject.FindGameObjectWithTag(Tags.Player);
-        _shieldDisplay = GameObject.FindGameObjectWithTag(Tags.ShipShield).GetComponent<Image>();
+        var shield = GameObject.FindGameObjectWithTag(Tags.ShipShield);
+        if(shield != null)
+        {
+            _shieldDisplay = shield.GetComponent<Image>();
+            _shieldDisplay.gameObject.SetActive(true);
+        }  
 
         _particleSystem = GetComponent<MultiParticle>();
         sphereCollider = GetComponent<SphereCollider>();
@@ -80,8 +85,14 @@ public class Shield : MonoBehaviour
 
                 rb.AddForce(awayDir * shieldForce * rb.mass);
 
-                hitSound.Play();
-                _particleSystem.Play();
+                if (hitSound != null)
+                {
+                    hitSound.Play();
+                }
+                if (_particleSystem != null)
+                {
+                    _particleSystem?.Play();
+                }
             }
         }
 

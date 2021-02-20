@@ -16,6 +16,7 @@ public class Missile : Projectile
     // Start is called before the first frame update
     void Start()
     {
+
         _rigidbody = GetComponent<Rigidbody>();
 
         _rigidbody.AddForce(transform.forward * speed);
@@ -25,10 +26,11 @@ public class Missile : Projectile
         {
             if (seeker != null && thrust != null) 
             {
-                seeker.GetComponent<CapsuleCollider>().radius = lockOnRange;
+                seeker.GetComponent<SphereCollider>().radius = lockOnRange;
 
                 boostClip.Play();
-                seeker.gameObject.SetActive(true); 
+                seeker.gameObject.SetActive(true);
+
                 thrust.gameObject.SetActive(true);
                 _rigidbody.AddForce(transform.forward * speed*2);
 
@@ -41,9 +43,9 @@ public class Missile : Projectile
     void Update()
     {
 
-        if (seeker != null && seeker.CurrentTarget != null)
+        if (seeker != null && seeker.currentTarget != null)
         {
-            var dir = (seeker.CurrentTarget.transform.position - transform.position).normalized;
+            var dir = (seeker.currentTarget.transform.position - transform.position).normalized;
 
             _rigidbody.AddForce(dir * maxSpeed, ForceMode.Force);
             
@@ -61,9 +63,9 @@ public class Missile : Projectile
 
     private void FixedUpdate()
     {
-        if (seeker != null && seeker.CurrentTarget != null)
+        if (seeker != null && seeker.currentTarget != null)
         {
-            transform.LookAt(seeker.CurrentTarget.transform);
+            transform.LookAt(seeker.currentTarget.transform);
         }
     }
 

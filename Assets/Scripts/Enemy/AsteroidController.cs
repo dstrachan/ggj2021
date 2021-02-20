@@ -25,16 +25,17 @@ public class AsteroidController : MonoBehaviour
 
     public float spawnRatePerMinute;
 
+    public GameObject center;
+
     public GameObject prefab;
 
-    private GameObject _player;
     private float _nextPossibleSpawnTime;
 
     private GameObject[] asteroids;
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag(Tags.Player);
+        center = GameObject.FindGameObjectWithTag(Tags.Player);
         asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
 
         //Update asteroid count every 2 seconds
@@ -61,18 +62,18 @@ public class AsteroidController : MonoBehaviour
 
     private void MoveAsteroidBackToPlayer(GameObject asteroid)
     {
-        if (_player != null && asteroid != null)
+        if (center != null && asteroid != null)
         {
-            var lookAtPlayer = _player.transform.position - asteroid.transform.position;
+            var lookAtPlayer = center.transform.position - asteroid.transform.position;
 
-            var dot = Vector3.Dot(_player.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
+            var dot = Vector3.Dot(center.GetComponent<Rigidbody>().velocity.normalized, lookAtPlayer);
 
             var destroyDistance = distanceToDestory;
             if (dot > 0)
             {
                 destroyDistance = distanceToDestroyBehind;
             }
-            if (Vector3.Distance(_player.transform.position, asteroid.transform.position) > destroyDistance)
+            if (Vector3.Distance(center.transform.position, asteroid.transform.position) > destroyDistance)
             {
                 RandomlyPlaceAsteroid(asteroid);
             }
@@ -83,7 +84,7 @@ public class AsteroidController : MonoBehaviour
     {
         var vector2 = Random.insideUnitCircle.normalized * Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        var pos = new Vector3(vector2.x + _player.transform.position.x, 0, vector2.y + _player.transform.position.z);
+        var pos = new Vector3(vector2.x + center.transform.position.x, 0, vector2.y + center.transform.position.z);
 
         asteroid.transform.position = pos;
 
@@ -99,7 +100,7 @@ public class AsteroidController : MonoBehaviour
         // Add some random direction
         var dir = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * transform.forward;
 
-        rigidbody.AddForce(dir * -Random.Range(minVelocity * scaler, maxVelocity * scaler));
+        rigidbody.AddForce(dir * Random.Range(minVelocity, maxVelocity));
         rigidbody.AddTorque(new Vector3(Random.Range(maxRotation * scaler, minRotation * scaler), 0, Random.Range(maxRotation * scaler, minRotation * scaler)));
     }
 

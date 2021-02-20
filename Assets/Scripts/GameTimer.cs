@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
@@ -12,7 +13,11 @@ public class GameTimer : MonoBehaviour
     public Image Health;
     public GameObject LaunchButton;
 
-    public float TimeLeftSeconds;
+    public float shopTime = 30;
+    public float flightTime = 60;
+    public float scoreMultiplier = 15;
+
+    private float _timeLeftSeconds;
     private ShipController _player;
     private bool _once;
 
@@ -21,8 +26,6 @@ public class GameTimer : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
-
-        TimerText.text = TimeLeftSeconds.ToString();
     }
 
     // Update is called once per frame
@@ -36,17 +39,29 @@ public class GameTimer : MonoBehaviour
             TimerText?.gameObject.SetActive(false);
         }
 
-        if (TimeLeftSeconds > 0)
+        if (_timeLeftSeconds > 0)
         {
-            TimeLeftSeconds -= Time.deltaTime;
+            _timeLeftSeconds -= Time.deltaTime;
 
-            TimerText.text = string.Format("{0:F1}", TimeLeftSeconds);
+            TimerText.text = string.Format("{0:F1}", _timeLeftSeconds);
 
         }
 
-        if(TimeLeftSeconds <= 0 )
+        if(_timeLeftSeconds <= 0 )
         {
             TimerEnd?.Invoke();
+        }
+    }
+
+    public void SetTimer(GameData gameData)
+    {
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            FindObjectOfType<GameTimer>()._timeLeftSeconds = shopTime + ((gameData.score + 1) * scoreMultiplier);
+        }
+        else
+        {
+            FindObjectOfType<GameTimer>()._timeLeftSeconds = flightTime + ((gameData.score + 1) * scoreMultiplier);
         }
     }
 }

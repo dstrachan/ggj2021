@@ -64,9 +64,11 @@ MonoBehaviour:
   maxSpeed: 12
   shipHealth: 100
   healthMultipler: 2
+  shipHealthTotal: 0
+  healthDisplay: {fileID: 0}
   dead: 0
   score: 0
-  deadEffect: {fileID: 4358604677249168140, guid: abf8eebf9700dcf45bb50f03922dd174, type: 3}
+  deadEffect: {fileID: -8466965003589312789, guid: 93da5631a502188479f49dd0db2570b3, type: 3}
 --- !u!1001 &5456865633306512267
 PrefabInstance:
   m_ObjectHideFlags: 0

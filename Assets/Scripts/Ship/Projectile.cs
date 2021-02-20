@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     internal float damage;
     internal float range;
 
+    public float explosionRange;
+
     protected Rigidbody _rigidbody;
     protected GameObject _player;
 
@@ -42,6 +44,19 @@ public class Projectile : MonoBehaviour
 
         if (target != null)
         {
+            if (explosionRange > 0)
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(target.transform.position, explosionRange);
+                foreach (var hitCollider in hitColliders)
+                {
+                    var alsoTarget = hitCollider.GetComponent<Target>();
+                    if (alsoTarget)
+                    {
+                        alsoTarget.hitPoints -= damage * (1.0f/ Vector3.Distance(transform.position, alsoTarget.transform.position));
+                    }
+                }
+            }
+
             var isMissile = GetComponent<Missile>();
             if (isMissile)
             {
