@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 214573260613695421}
   - component: {fileID: 2210478002984472638}
   - component: {fileID: 2494401118273864737}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 9128571242877985007}
   - component: {fileID: 1619745606663803531}
   - component: {fileID: 2342825153877585463}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4896,7 +4896,7 @@ GameObject:
   - component: {fileID: 8267431802393577136}
   - component: {fileID: 7434442454241365091}
   - component: {fileID: 1108819336019417786}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: ShieldGen
   m_TagString: ShipComponent
   m_Icon: {fileID: 0}
@@ -4959,7 +4959,7 @@ GameObject:
   - component: {fileID: 5101021443132677589}
   - component: {fileID: 4555151781877754699}
   - component: {fileID: 5346102072889833364}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5082,9 +5082,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 884734610234949368, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 997252657250085718, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1125964460798299286, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
       propertyPath: m_Name
       value: ShieldEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125964460798299286, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017378763804556641, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6223250126667559283, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
       propertyPath: emission
@@ -5093,6 +5109,14 @@ PrefabInstance:
     - target: {fileID: 6223250126667559283, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
       propertyPath: shieldForce
       value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764333748469114114, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887004665941313982, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04b32e30bd82c547b846ebcc729fe9e, type: 3}
