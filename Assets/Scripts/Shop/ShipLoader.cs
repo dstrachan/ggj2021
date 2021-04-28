@@ -51,7 +51,6 @@ public class ShipLoader : MonoBehaviour
     private void Awake()
     {
         ImportFromPlayerPrefs(shipName);
-        Debug.Log($"Score: {_gameData.score}; Total Score: {_gameData.totalScore}");
     }
 
     private void Start()

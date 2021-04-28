@@ -24,12 +24,11 @@ public class ClickableThing : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.Log(hit.transform.gameObject.name);
+
 
                 if (hit.transform.gameObject == gameObject)
                 {
                     var shipCell = hit.transform.gameObject.GetComponent<ShipCell>();
-                    Debug.Log("in if " + shipCell.cellType);
 
                     testMove.SetChild(shipCell.cellType);
 

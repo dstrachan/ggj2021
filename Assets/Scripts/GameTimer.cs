@@ -48,13 +48,14 @@ public class GameTimer : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "Shop")
         {
-            var asteroids = FindObjectOfType<AsteroidController>();
+            // Some difficulty scaling?
+        //    var asteroids = FindObjectOfType<AsteroidController>();
 
-            asteroids.maxAsteroids = (int)(asteroids.maxAsteroids * difficultyModifier);
+        //    asteroids.maxAsteroids = (int)(asteroids.maxAsteroids * difficultyModifier);
 
-            var planets = FindObjectOfType<PlanetController>();
-            planets.maxSpawnRadius = (int)(planets.maxSpawnRadius * difficultyModifier);
-            planets.numberOfPlanets = (int)(planets.maxSpawnRadius * difficultyModifier);
+        //    var planets = FindObjectOfType<PlanetController>();
+        //    planets.maxSpawnRadius = (int)(planets.maxSpawnRadius * difficultyModifier);
+        //    planets.numberOfPlanets = (int)(planets.maxSpawnRadius * difficultyModifier);
         }
 
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
@@ -73,6 +74,11 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            Application.Quit();
+        }
+
         if(!_once && _player.dead)
         {
             launchButton?.gameObject.SetActive(true);

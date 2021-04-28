@@ -5078,7 +5078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271349659363934447, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
       propertyPath: numberOfPlanets
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d603ce00f7ca2b145b8544a1098c60c9, type: 3}
@@ -6464,7 +6464,7 @@ MonoBehaviour:
   scoreSheepEnd: {fileID: 1051612927}
   launchButton: {fileID: 1732380307}
   shopTime: 60
-  flightTime: 30
+  flightTime: 45
   scoreMultiplier: 0
   score: 0
   scoreSheep: 0

@@ -28,8 +28,14 @@ public class PointOfInterest : MonoBehaviour
 
     public void Deactivate()
     {
-        _arrowInstance?.gameObject?.SetActive(false);
-        _textInstance?.gameObject?.SetActive(false);
+        if (_arrowInstance != null)
+        {
+            _arrowInstance?.gameObject?.SetActive(false);
+        }
+        if (_textInstance != null)
+        {
+            _textInstance?.gameObject?.SetActive(false);
+        }
     }
 
     // Update is called once per frame
