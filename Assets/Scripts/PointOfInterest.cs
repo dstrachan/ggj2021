@@ -26,6 +26,12 @@ public class PointOfInterest : MonoBehaviour
         _player.shipHealth += _player.shipHealthTotal / 50f;
     }
 
+    public void Deactivate()
+    {
+        _arrowInstance?.gameObject?.SetActive(false);
+        _textInstance?.gameObject?.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -47,4 +53,6 @@ public class PointOfInterest : MonoBehaviour
 
         _arrowInstance.transform.LookAt(gameObject.transform);
     }
+
+
 }

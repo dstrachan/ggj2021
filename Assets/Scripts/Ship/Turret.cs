@@ -12,10 +12,12 @@ public class Turret : MonoBehaviour
     private Gun[] guns;
     private bool noTarget;
     private bool _inert;
+    private ShipController _player;
 
     private void Start()
     {
         seeker = GetComponentInChildren<Seeker>();
+        _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
 
         guns = GetComponentsInChildren<Gun>();
         foreach (var gun in guns)
@@ -31,7 +33,7 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
-        if (!_inert)
+        if (!_inert && !_player.dead)
         {
             foreach (var gun in guns)
             {

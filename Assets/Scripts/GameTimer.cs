@@ -87,7 +87,7 @@ public class GameTimer : MonoBehaviour
 
 
             scoreEnd.text = $"You rescued {score} galactic citizens!";
-            scoreSheepEnd.text = $"You rescued {score} space sheep!";
+            scoreSheepEnd.text = $"You rescued {scoreSheep} space sheep!";
 
             PlayerPrefs.DeleteAll();
         }
@@ -117,7 +117,7 @@ public class GameTimer : MonoBehaviour
             scoreSheepText.text = $"Sheep rescued: {scoreSheep}";
         }
 
-        if (_timeLeftSeconds <= 0 )
+        if (_timeLeftSeconds <= 0 && !_player.dead)
         {
             TimerEnd?.Invoke();
         }

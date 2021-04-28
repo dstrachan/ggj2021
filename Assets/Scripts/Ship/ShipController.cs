@@ -93,6 +93,7 @@ public class ShipController : MonoBehaviour
             }
 
             poi.enabled = false;
+            poi.gameObject.SetActive(false);
             Destroy(poi.gameObject);
             Destroy(poi._arrowInstance);
             Destroy(poi._textInstance);
