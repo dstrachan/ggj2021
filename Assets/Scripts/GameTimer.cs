@@ -22,8 +22,10 @@ public class GameTimer : MonoBehaviour
     public float flightTime = 60;
     public float scoreMultiplier = 15;
 
-    public float score = 0;
-    public float scoreSheep = 0;
+    public int score = 0;
+    public int scoreSheep = 0;
+
+    public float difficultyModifier = 1;
 
     private float _timeLeftSeconds;
     private ShipController _player;
@@ -33,6 +35,28 @@ public class GameTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        var gameData = JsonUtility.FromJson<GameData>(PlayerPrefs.GetString("ship", string.Empty));
+        if(gameData == null)
+        {
+            gameData = new GameData();
+        }
+
+        score = gameData.score;
+        scoreSheep = gameData.scoreSheep;
+        difficultyModifier = gameData.difficulty;
+
+        if (SceneManager.GetActiveScene().name != "Shop")
+        {
+            var asteroids = FindObjectOfType<AsteroidController>();
+
+            asteroids.maxAsteroids = (int)(asteroids.maxAsteroids * difficultyModifier);
+
+            var planets = FindObjectOfType<PlanetController>();
+            planets.maxSpawnRadius = (int)(planets.maxSpawnRadius * difficultyModifier);
+            planets.numberOfPlanets = (int)(planets.maxSpawnRadius * difficultyModifier);
+        }
+
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
 
         if (SceneManager.GetActiveScene().name == "Shop")
@@ -56,6 +80,7 @@ public class GameTimer : MonoBehaviour
             scoreEnd?.gameObject.SetActive(true);
             scoreSheepEnd?.gameObject.SetActive(true);
 
+            timerText?.gameObject.SetActive(false);
             health?.gameObject.SetActive(false);
             scoreText?.gameObject.SetActive(false);
             scoreSheepText?.gameObject.SetActive(false);
@@ -64,7 +89,14 @@ public class GameTimer : MonoBehaviour
             scoreEnd.text = $"You rescued {score} galactic citizens!";
             scoreSheepEnd.text = $"You rescued {score} space sheep!";
 
-            timerText?.gameObject.SetActive(false);
+            PlayerPrefs.DeleteAll();
+        }
+
+
+        if (SceneManager.GetActiveScene().name != "Shop" && FindObjectsOfType<PointOfInterest>().Length == 0)
+        {
+            // just end the round if we picked everyone up
+            _timeLeftSeconds = 0;
         }
 
         if (_timeLeftSeconds > 0)
@@ -72,7 +104,7 @@ public class GameTimer : MonoBehaviour
             _timeLeftSeconds -= Time.deltaTime;
 
             timerText.text = string.Format("{0:F1}", _timeLeftSeconds);
-
+            
         }
 
         if (scoreText != null)
@@ -89,7 +121,9 @@ public class GameTimer : MonoBehaviour
         {
             TimerEnd?.Invoke();
         }
+
     }
+
 
 
 }

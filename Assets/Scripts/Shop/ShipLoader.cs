@@ -16,7 +16,9 @@ public class ShipData
 public class GameData
 {
     public List<ShipData> shipData = new List<ShipData>();
-    public float score;
+    public int score;
+    public int scoreSheep;
+    public float difficulty;
     public float totalScore;
 }
 
@@ -71,9 +73,11 @@ public class ShipLoader : MonoBehaviour
         if (gameData == null)
         {
             _gameData = new GameData();
+
             return obj;
         }
-        
+
+
         var grid = obj.GetComponentInChildren<ShipGrid>();
         foreach (var cell in gameData.shipData)
         {
@@ -137,9 +141,9 @@ public class ShipLoader : MonoBehaviour
     {
         var gameData = new GameData();
 
-        var score = FindObjectOfType<GameTimer>().score;
-        gameData.score = score;
-        gameData.totalScore = _gameData.totalScore + score;
+        gameData.score = FindObjectOfType<GameTimer>().score;
+        gameData.scoreSheep = FindObjectOfType<GameTimer>().scoreSheep;
+        gameData.difficulty = FindObjectOfType<GameTimer>().difficultyModifier += 0.1f;
 
         foreach (var cell in _shipGrid.cells.Values)
         {

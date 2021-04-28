@@ -34,6 +34,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
+            // gravity in the shop for components to fall onto conveyor
             Physics.gravity = new Vector3(0, -9.1f, 0);
         }
 
