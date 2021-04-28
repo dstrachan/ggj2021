@@ -10,7 +10,9 @@ public class PointOfInterestChooser : MonoBehaviour
 
     private void Start()
     {
-        if (UnityEngine.Random.value > 0.5)
+        var rnd = UnityEngine.Random.value;
+  
+        if (rnd > 0.5)
         {
             Alien.gameObject.SetActive(true);
             Sheep.gameObject.SetActive(false);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gun : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_player.dead)
+        if (!_player.dead &&  SceneManager.GetActiveScene().name != "Shop")
         {
             if (Input.GetKey(ShootKey))
             {
