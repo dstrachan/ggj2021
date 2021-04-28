@@ -71,12 +71,8 @@ public class ShipLoader : MonoBehaviour
         if (gameData == null)
         {
             _gameData = new GameData();
-            gameTimer.SetTimer(_gameData);
-
             return obj;
         }
-
-        gameTimer.SetTimer(gameData);
         
         var grid = obj.GetComponentInChildren<ShipGrid>();
         foreach (var cell in gameData.shipData)
@@ -141,7 +137,7 @@ public class ShipLoader : MonoBehaviour
     {
         var gameData = new GameData();
 
-        var score = FindObjectOfType<ShipController>().score;
+        var score = FindObjectOfType<GameTimer>().score;
         gameData.score = score;
         gameData.totalScore = _gameData.totalScore + score;
 

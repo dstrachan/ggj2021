@@ -8,14 +8,22 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    public Text TimerText;
-    public Text GameOver;
-    public Image Health;
-    public GameObject LaunchButton;
+    public Text timerText;
+    public Text gameOver;
+    public Image health;
+    public Text scoreText;
+    public Text scoreSheepText;
+    public Text scoreEnd;
+    public Text scoreSheepEnd;
+
+    public GameObject launchButton;
 
     public float shopTime = 30;
     public float flightTime = 60;
     public float scoreMultiplier = 15;
+
+    public float score = 0;
+    public float scoreSheep = 0;
 
     private float _timeLeftSeconds;
     private ShipController _player;
@@ -26,6 +34,16 @@ public class GameTimer : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<ShipController>();
+
+        if (SceneManager.GetActiveScene().name == "Shop")
+        {
+            _timeLeftSeconds = shopTime;
+        }
+        else
+        {
+            _timeLeftSeconds = flightTime;
+        }
+
     }
 
     // Update is called once per frame
@@ -33,35 +51,45 @@ public class GameTimer : MonoBehaviour
     {
         if(!_once && _player.dead)
         {
-            Health?.gameObject.SetActive(false);
-            LaunchButton?.gameObject.SetActive(true);
-            GameOver?.gameObject.SetActive(true);
-            TimerText?.gameObject.SetActive(false);
+            launchButton?.gameObject.SetActive(true);
+            gameOver?.gameObject.SetActive(true);
+            scoreEnd?.gameObject.SetActive(true);
+            scoreSheepEnd?.gameObject.SetActive(true);
+
+            health?.gameObject.SetActive(false);
+            scoreText?.gameObject.SetActive(false);
+            scoreSheepText?.gameObject.SetActive(false);
+
+
+            scoreEnd.text = $"You rescued {score} galactic citizens!";
+            scoreSheepEnd.text = $"You rescued {score} space sheep!";
+
+            timerText?.gameObject.SetActive(false);
         }
 
         if (_timeLeftSeconds > 0)
         {
             _timeLeftSeconds -= Time.deltaTime;
 
-            TimerText.text = string.Format("{0:F1}", _timeLeftSeconds);
+            timerText.text = string.Format("{0:F1}", _timeLeftSeconds);
 
         }
 
-        if(_timeLeftSeconds <= 0 )
+        if (scoreText != null)
+        {
+            scoreText.text = $"Citizens rescued: {score}";
+        }
+
+        if (scoreSheepText != null)
+        {
+            scoreSheepText.text = $"Sheep rescued: {scoreSheep}";
+        }
+
+        if (_timeLeftSeconds <= 0 )
         {
             TimerEnd?.Invoke();
         }
     }
 
-    public void SetTimer(GameData gameData)
-    {
-        if (SceneManager.GetActiveScene().name == "Shop")
-        {
-            FindObjectOfType<GameTimer>()._timeLeftSeconds = shopTime + ((gameData.score + 1) * scoreMultiplier);
-        }
-        else
-        {
-            FindObjectOfType<GameTimer>()._timeLeftSeconds = flightTime + ((gameData.score + 1) * scoreMultiplier);
-        }
-    }
+
 }

@@ -15,6 +15,7 @@ public class Shield : MonoBehaviour
 
     public ParticleSystem buzzParticles;
     public ParticleSystem shieldBubble;
+    public ParticleSystem energyParticles;
 
     private Image _shieldDisplay;
     private SphereCollider sphereCollider;
@@ -91,6 +92,9 @@ public class Shield : MonoBehaviour
                             renderer.material.SetColor("_EmissionColor", Color.gray);
                         }
                     }
+
+                    energyParticles?.Stop();
+                    energyParticles.gameObject.SetActive(false);
                 }
 
                 var awayDir = (asteroid.transform.position - _player.transform.position).normalized;

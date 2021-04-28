@@ -379,8 +379,8 @@ MonoBehaviour:
   GameOver: {fileID: 0}
   Health: {fileID: 0}
   LaunchButton: {fileID: 0}
-  shopTime: 30
-  flightTime: 60
+  shopTime: 60
+  flightTime: 80
   scoreMultiplier: 0
   TimerEnd:
     m_PersistentCalls:

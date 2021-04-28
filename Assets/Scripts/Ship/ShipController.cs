@@ -28,8 +28,6 @@ public class ShipController : MonoBehaviour
 
     public bool dead;
 
-    public float score;
-
     public MultiParticle deadEffect;
 
     // Start is called before the first frame update
@@ -85,7 +83,16 @@ public class ShipController : MonoBehaviour
         var poi = collider.gameObject.GetComponentInParent<PointOfInterest>();
         if (poi != null)
         {
-            score += 1;
+            if(poi.poiType == PoiType.Sheep)
+            {
+                FindObjectOfType<GameTimer>().scoreSheep += 1;
+            }
+            else
+            {
+                FindObjectOfType<GameTimer>().score += 1;
+            }
+
+            poi.enabled = false;
             Destroy(poi.gameObject);
             Destroy(poi._arrowInstance);
             Destroy(poi._textInstance);
@@ -107,7 +114,12 @@ public class ShipController : MonoBehaviour
         foreach (var child in children)
         {
             child.transform.parent = null;
-            var childrb = child.AddComponent<Rigidbody>();
+            if (!child.GetComponent<Rigidbody>())
+            {
+                child.AddComponent<Rigidbody>();
+            }
+
+            var childrb = child.GetComponent<Rigidbody>();
 
             var dir = Quaternion.AngleAxis(Random.Range(-100, 100), Vector3.up) * Vector3.forward;
 

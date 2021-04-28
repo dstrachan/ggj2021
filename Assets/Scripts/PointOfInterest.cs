@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PoiType
+{
+    Alien,
+    Sheep
+}
+
 public class PointOfInterest : MonoBehaviour
 {
     public GameObject arrow;
@@ -13,6 +19,7 @@ public class PointOfInterest : MonoBehaviour
     private ShipController _player;
     public GameObject _arrowInstance;
     public TextMesh _textInstance;
+    public PoiType poiType;
 
     private bool _once;
     // Start is called before the first frame update
