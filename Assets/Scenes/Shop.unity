@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!4 &12180393 stripped
@@ -282,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: alien (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b48295b397822944ade5c8a4ff9cf95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
 --- !u!4 &34425464 stripped
@@ -1246,6 +1254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!4 &680934006 stripped
@@ -1431,6 +1443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!4 &795857006 stripped
@@ -1602,6 +1618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!1 &898391807 stripped
@@ -1843,6 +1863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: alien (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b48295b397822944ade5c8a4ff9cf95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
 --- !u!4 &1167352076 stripped
@@ -1935,6 +1959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!4 &1243763846 stripped
@@ -2032,6 +2060,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: alien
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b48295b397822944ade5c8a4ff9cf95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
 --- !u!1 &1441552330 stripped
@@ -2124,6 +2156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: alien (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b48295b397822944ade5c8a4ff9cf95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
 --- !u!4 &1554687427 stripped
@@ -2600,6 +2636,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: alien (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9b48295b397822944ade5c8a4ff9cf95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d537f48d7cfc4418c2f97ef2ad0313, type: 3}
 --- !u!1 &1842120972 stripped
@@ -2831,6 +2871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sheep (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57634a73afa767b43bca5a3c891c8455, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79707513dd38fa4b9233c2572c4dacc, type: 3}
 --- !u!1 &1986129681 stripped
